@@ -1,10 +1,10 @@
 import React from 'react'
 // import {Link} from 'react-router-dom';
 import './NotePage.css'
-import NotefulContext from './NotefulContext';
+import AppContext from './AppContext';
 
 export default class NotePage extends React.Component{
-  static contextType = NotefulContext
+  static contextType = AppContext
   render() {
     // console.log(props)
     const note = this.context.notes.find(note =>

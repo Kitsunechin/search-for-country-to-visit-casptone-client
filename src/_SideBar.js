@@ -1,11 +1,11 @@
 import React from 'react'
 import './SideBar.css'
-import SideBarItem from './SidebarItem'
+import SideBarItem from './_SidebarItem'
 import {Link} from 'react-router-dom';
-import NotefulContext from './NotefulContext';
+import AppContext from './AppContext';
 
 export default class Sidebar extends React.Component {
-    static contextType = NotefulContext
+    static contextType = AppContext
     render() {
         console.log(this.context.folders)
         const folderId = this.context.folders.map(folder => folder.id)

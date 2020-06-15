@@ -42,6 +42,15 @@ Landing/Login Page
 The app's functionality includes:
 * Every User has the ability to create an account
 
+## React Components Structure
+* __Index.js__ (stateless)
+    * __App.js__ (stateless)
+        * __LandingPage.js__ (stateless) 
+            * __RegistartionPage.js__ (stateless)
+            * __LoginPage.js__ (stateless) 
+        * __BucketListPage.js__ (stateless) 
+        * __VisitedPage.js__ (stateless) 
+
 ## Business Objects (back-end structure)
 * User (database table)
     * Username (email validation)

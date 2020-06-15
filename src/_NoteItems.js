@@ -2,10 +2,10 @@ import React from 'react'
 import './NotePage.css'
 import {Link} from 'react-router-dom';
 import config from './config'
-import NotefulContext from './NotefulContext';
+import AppContext from './AppContext';
 
 export default class NoteItems extends React.Component {
-    static contextType = NotefulContext
+    static contextType = AppContext
 
     handleDeleteNote = (event) => {
         const noteNum = this.props.match.params

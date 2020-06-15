@@ -1,9 +1,9 @@
 import React from 'react'
 import {Link} from 'react-router-dom';
-import NotefulContext from './NotefulContext';
+import AppContext from './AppContext';
 
 export default class FolderPage extends React.Component {
-  static contextType = NotefulContext
+  static contextType = AppContext
 
   render() {
     const folder = this.context.folders.find(folder =>

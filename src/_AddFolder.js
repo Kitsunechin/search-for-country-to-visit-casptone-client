@@ -1,11 +1,11 @@
 import React from 'react'
 import config from './config'
-import NotefulContext from './NotefulContext';
+import AppContext from './AppContext';
 import ValidationError from './ValidationError';
 import PropTypes from 'prop-types';
 
 export default class AddFolder extends React.Component{
-    static contextType = NotefulContext
+    static contextType = AppContext
 
     state = {
         appError: null,

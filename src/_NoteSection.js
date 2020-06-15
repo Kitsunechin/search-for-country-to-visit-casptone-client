@@ -1,11 +1,11 @@
 import React from 'react'
-import NoteItems from './NoteItems'
+import NoteItems from './_NoteItems'
 import {Link} from 'react-router-dom';
-import NotefulContext from './NotefulContext';
+import AppContext from './AppContext';
 
 class NoteSection extends React.Component {
 // console.log(props)
-static contextType = NotefulContext
+static contextType = AppContext
 render(){
   return(
         (<div className="NoteBox">

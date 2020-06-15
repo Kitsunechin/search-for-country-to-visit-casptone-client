@@ -1,7 +1,7 @@
 import React from 'react';
-import store from './STORE'
+import store from './_STORE'
 
-const NotefulContext = React.createContext ({
+const AppContext = React.createContext ({
     notes: [],
     folders: [],
     addFolder: () => {},
@@ -9,4 +9,4 @@ const NotefulContext = React.createContext ({
     deleteNote: () => {},
 })
 
-export default NotefulContext;
+export default AppContext;

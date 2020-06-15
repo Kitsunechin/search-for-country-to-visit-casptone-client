@@ -1,17 +1,17 @@
 import React from 'react';
-import './App.css';
-import Header from './Header'
-import SideBar from './SideBar'
-import NoteSection from './NoteSection'
-// import STORE from './STORE';
-import NotFoundPage from './NotFoundPage'
-import { Route, Switch } from 'react-router-dom';
-import NotePage from './NotePage'
-import AddNote from './AddNote'
-import AddFolder from './AddFolder'
-import FolderPage from './FolderPage'
-import NotefulContext from './NotefulContext';
+import { Route, Switch } from 'react-router-dom'
+
 import config from './config'
+import './App.css';
+import AppContext from './AppContext';
+
+import Header from './Header'
+import NotFoundPage from './NotFoundPage'
+import LandingPage from './LandingPage'
+import LoginPage from './LoginPage'
+import RegistrationPage from './RegistrationPage'
+import BucketListPage from './BucketListPage'
+import VisitedPage from './VisitedPage'
 
 export default class App extends React.Component {
   
@@ -87,44 +87,26 @@ render() {
   console.log(contextValue)
 
   return (
-    <NotefulContext.Provider value={contextValue}>
+    <AppContext.Provider value={contextValue}>
     <div className="App">
       <Header/>
       <main className='Main-view'>
-        <SideBar 
-        />
         <Switch>
           <Route exact path='/' render={() => {
-            return <NoteSection />
+            return <LandingPage />
           }}/>
-          <Route path='/add-note' render={() => {
-            return <AddNote />
+          <Route path='/visitedPage' render={() => {
+            return <VisitedPage />
           }}/>
-          <Route path='/add-folder' render={() => {
-            return <AddFolder />
+          <Route path='/bucket-list' render={() => {
+            return <BucketListPage />
           }}/>
-          <Route path={"/note/:noteId"}
-          render={(routerProps) => {
-            // console.log(`router props ${routerProps}`)
-            return <NotePage 
-            routerProps={routerProps}
-            />
-          }}/>
-          <Route path={"/folder/:folderId"}
-          render={(routerProps) => {
-            console.log(routerProps)
-            console.log(this.state.folders)
-            return <FolderPage 
-            routerProps={routerProps}
-            />
-          }}
-          // component={FolderPage}
           />
          <Route component={NotFoundPage} />
         </Switch>
       </main>
     </div>
-    </NotefulContext.Provider>
+    </AppContext.Provider>
   );
  }
 }
