@@ -1,0 +1,48 @@
+li {
+    list-style: none
+}
+
+div.SideBarBox {
+    width: 30%;
+    text-align: left;
+    align-items: left;
+    
+}
+
+.SideBarBox button {
+    margin-left: auto;
+    margin-right: auto;
+    color: rgb(253, 253, 253);
+    border: none;
+}
+
+button:hover {
+    background-color: purple;
+}
+
+li {
+    background-color: palevioletred;
+    color: white;
+    padding: 1em;
+    margin-right: 1.5em;
+}
+
+li:hover {
+    background-color: purple;
+}
+
+li:active {
+    background-color: purple;
+}
+
+.SideBarItem a {
+    color:white
+}
+
+.not-active {
+    background-color: palevioletred;
+  }
+  
+  .active {
+    background-color: rebeccapurple;
+  }

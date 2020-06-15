@@ -1,0 +1,26 @@
+.App-header {
+    background-color: #F6C800;
+    color: white;
+    min-height: 30vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(10px + 2vmin);
+  }
+
+  .App-header h1 {
+    color: black;
+    text-decoration: none;
+  }
+
+  button {
+    font-size: large;
+    padding: 0.5em;
+  }
+
+  h1:hover {
+    text-decoration-line: underline;
+    text-decoration-color: rebeccapurple;
+    padding: 0.5em
+  }
