@@ -2,6 +2,7 @@
     display: inline-flex;
     color:white;
     text-decoration: none;
+    padding: 18px 10px
 }
 
 .nav-link:hover,
@@ -12,7 +13,7 @@
 .nav {
     margin-left: 5em;
 }
-.outer-nav {
+.toolbar_navigation {
     display: flex;
     align-items: center;
     height: 100%
@@ -35,4 +36,20 @@
 
 .spacer {
     flex: 1
+}
+
+@media (max-width: 768px) {
+    .nav {
+        display: none;
+    }
+}
+
+@media (min-width: 769px) {
+    .toolbar-toggle {
+        display:none;
+    }
+
+    .nav_logo {
+        margin-left: 0;
+    }
 }

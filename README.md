@@ -45,7 +45,11 @@ The app's functionality includes:
 ## React Components Structure
 * __Index.js__ (stateless)
     * __App.js__ (stateless)
-        * __LandingPage.js__ (stateless) 
+        * __LandingPage.js__ (stateless)
+        * __Navigation.js__ (stateless)
+            * __DrawerToggleButton.js__ (stateless)
+        * __Backdrop.js__ (stateless) 
+        * __SideDrawer.js__ (stateless)
             * __RegistartionPage.js__ (stateless)
             * __LoginPage.js__ (stateless) 
         * __BucketListPage.js__ (stateless) 

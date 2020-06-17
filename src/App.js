@@ -10,16 +10,28 @@ import LandingPage from './LandingPage'
 import Navigation from './Navigation'
 import BucketListPage from './BucketListPage'
 import VisitedPage from './VisitedPage'
+import SideDrawer from './SideDrawer'
+import Backdrop from './Backdrop'
 
 
 export default class App extends React.Component {
   
   state = {
+    sideDrawerOpen: false,
     // store: STORE,
     notes: [],
     folders: []
   }
   
+  drawerToggleButton = () => {
+    this.setState((prevState) => {
+      return {sideDrawerOpen: !prevState.sideDrawerOpen}
+    })
+  }
+
+  backdropClickHandler = () => {
+    this.setState({sideDrawerOpen: false})
+  }
 
   componentDidMount() {
         Promise.all([
@@ -87,10 +99,18 @@ render() {
   console.log(contextValue)
 
 
+  let backdrop;
+
+  if (this.state.sideDrawerOpen) {
+    backdrop = <Backdrop click={this.backdropClickHandler}/>
+  }
+
   return (
     <AppContext.Provider value={contextValue}>
     <div style={{height:'100%'}} className="App">
-      <Navigation/>
+      <Navigation drawerClickHandler = {this.drawerToggleButton}/>
+      <SideDrawer show={this.state.sideDrawerOpen}/>
+      {backdrop}
       <main className='Main-view'>
         <Switch>
           <Route exact path='/' render={() => {
