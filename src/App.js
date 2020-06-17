@@ -94,7 +94,8 @@ render() {
     addNote: this.addNote,
     deleteNote: this.handleDeleteNote,
     addErrorNotes: this.addErrorNotes,
-    notesError: this.notesError
+    notesError: this.notesError,
+    drawerToggleButton: this.drawerToggleButton,
   }
   console.log(contextValue)
 
@@ -108,7 +109,7 @@ render() {
   return (
     <AppContext.Provider value={contextValue}>
     <div style={{height:'100%'}} className="App">
-      <Navigation drawerClickHandler = {this.drawerToggleButton}/>
+      <Navigation />
       <SideDrawer show={this.state.sideDrawerOpen}/>
       {backdrop}
       <main className='Main-view'>

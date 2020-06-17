@@ -24,3 +24,9 @@ h1 {
     background-size: cover;
     padding: 25px
 }
+
+@media (min-width: 696px) {
+    .App-header {
+        padding: 65px;
+    }
+}

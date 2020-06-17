@@ -7,6 +7,7 @@ const AppContext = React.createContext ({
     addFolder: () => {},
     addNote: () => {},
     deleteNote: () => {},
+    drawerToggleButton: () =>{},
 })
 
 export default AppContext;
