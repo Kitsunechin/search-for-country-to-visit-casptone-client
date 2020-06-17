@@ -5,22 +5,22 @@ import config from './config'
 import './App.css';
 import AppContext from './AppContext';
 
-import Header from './Header'
 import NotFoundPage from './NotFoundPage'
 import LandingPage from './LandingPage'
-import LoginPage from './LoginPage'
-import RegistrationPage from './RegistrationPage'
+import Navigation from './Navigation'
 import BucketListPage from './BucketListPage'
 import VisitedPage from './VisitedPage'
 
+
 export default class App extends React.Component {
   
-  state={
+  state = {
     // store: STORE,
     notes: [],
     folders: []
   }
-    
+  
+
   componentDidMount() {
         Promise.all([
             fetch(`${config.API_ENDPOINT}/notes`),
@@ -86,16 +86,17 @@ render() {
   }
   console.log(contextValue)
 
+
   return (
     <AppContext.Provider value={contextValue}>
-    <div className="App">
-      <Header/>
+    <div style={{height:'100%'}} className="App">
+      <Navigation/>
       <main className='Main-view'>
         <Switch>
           <Route exact path='/' render={() => {
             return <LandingPage />
           }}/>
-          <Route path='/visitedPage' render={() => {
+          <Route path='/visited' render={() => {
             return <VisitedPage />
           }}/>
           <Route path='/bucket-list' render={() => {

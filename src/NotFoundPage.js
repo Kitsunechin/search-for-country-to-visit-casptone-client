@@ -3,7 +3,7 @@ import React from 'react'
 export default function NotePage() {
         return(
             <div>
-                Page not Found
+                404 Page not Found
             </div>
         )
 }

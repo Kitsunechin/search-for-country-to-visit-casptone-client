@@ -5,7 +5,10 @@ import {Link} from 'react-router-dom';
 const Header = () => 
     (
         <header className="App-header">
-            <Link style={{ textDecoration: 'none' }} to="/"><h1>Noteful</h1></Link>{' '}
+            <h1>Trippster</h1>
+            <div class='subtitle'>With Trippster you can plan your future travells and keep track of the places you have already visited
+           <span> Login or Register and start planning your next destination!</span>
+           </div>
         </header>
     )
 export default Header

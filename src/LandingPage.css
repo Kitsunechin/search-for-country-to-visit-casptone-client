@@ -1,0 +1,48 @@
+.box-controller {
+    display: flex;
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+    height: 35px;
+    margin-bottom: 30px;
+    align-items: center;
+    transition: visibility 0.5s ease-out;
+}
+
+.controller {
+    flex: 1;
+    text-align: center;
+    height: 100%;
+    line-height: 2;
+    cursor: pointer;
+}
+
+/* //Currently Selected Controller */
+.selected-controller {
+    transition: border 0.5s ease-out;
+    border-bottom: 2px solid rebeccapurple;
+}
+
+.box {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.box-container {
+    width: 50%;
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 50px
+}
+
+.inner-container {
+    padding-bottom: 50px;
+}

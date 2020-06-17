@@ -1,0 +1,9 @@
+body {
+    color: black;
+}
+.Bucket-list {
+    width: 60%;
+    margin-right: auto;
+    margin-left: auto;
+    padding-top: 100px;
+}

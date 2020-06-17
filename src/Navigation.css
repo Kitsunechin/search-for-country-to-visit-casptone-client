@@ -1,0 +1,38 @@
+.nav-link {
+    display: inline-flex;
+    color:white;
+    text-decoration: none;
+}
+
+.nav-link:hover,
+.nav-link:active {
+    color: rebeccapurple
+}
+
+.nav {
+    margin-left: 5em;
+}
+.outer-nav {
+    display: flex;
+    align-items: center;
+    height: 100%
+}
+
+.toolbar {
+    position: fixed;
+    width: 100%;
+    background: gray;
+    height: 56px;
+    padding: 20px;
+}
+
+.nav_logo {
+    color: white;
+    text-decoration: none;
+    font-size: 1.5rem;
+    margin-left: 1rem
+}
+
+.spacer {
+    flex: 1
+}
