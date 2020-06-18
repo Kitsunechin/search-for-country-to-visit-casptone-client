@@ -1,3 +1,6 @@
+body {
+    background-color: #63BDB3;
+}
 .box-controller {
     display: flex;
     width: 50%;
