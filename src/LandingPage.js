@@ -2,7 +2,7 @@ import React from 'react'
 
 import './LandingPage.css'
 import LoginPage from './LoginPage';
-import RegistartionPage from './RegistrationPage';
+import RegistrationPage from './RegistrationPage';
 import Header from './Header';
 
 export default class LandingPage extends React.Component {
@@ -46,8 +46,7 @@ export default class LandingPage extends React.Component {
        </div>
      </div>
         <div className="box-container">
-        {this.state.isLoginOpen && <LoginPage/>}
-        {this.state.isRegisterOpen && <RegistartionPage/>}
+        {this.state.isLoginOpen ? <LoginPage/>: <RegistrationPage/>}
        </div>
        </div>
     ) 
