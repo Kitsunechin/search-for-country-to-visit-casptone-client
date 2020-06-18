@@ -48,7 +48,6 @@ export default class LandingPage extends React.Component {
         <div className="box-container">
         {this.state.isLoginOpen && <LoginPage/>}
         {this.state.isRegisterOpen && <RegistartionPage/>}
-        <LoginPage/>
        </div>
        </div>
     ) 
