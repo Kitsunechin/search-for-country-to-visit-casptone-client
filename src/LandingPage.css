@@ -66,3 +66,8 @@ button, input {
         width: 30%
     }
 }
+
+.error-message {
+    color: red;
+    font-size: 1rem;
+}
