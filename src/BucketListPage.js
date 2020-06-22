@@ -1,4 +1,5 @@
 import React from 'react'
+import config from './config'
 
 import './VisitedPage.css'
 
@@ -45,7 +46,7 @@ class VisitedPage extends React.Component {
     //check if the state is populated with the search params data
     console.log(this.state.params)
 
-    const searchURL = 'http://localhost:3000/'
+    const searchURL = `${config.API_ENDPOINT}/bucketlist-page`
 
     const queryString = this.formatQueryParams(data)
 

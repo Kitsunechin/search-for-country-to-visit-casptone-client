@@ -1,5 +1,7 @@
 import React from 'react'
 import {Link} from 'react-router-dom';
+import config from './config'
+
 import './LandingPage.css'
 export default class LoginPage extends React.Component {
 
@@ -75,7 +77,7 @@ export default class LoginPage extends React.Component {
       //check if the state is populated with the search params data
       console.log(this.state.params)
 
-      const searchURL = 'http://localhost:3000/'
+      const searchURL = `${config.API_ENDPOINT}/login-page`
 
       const queryString = this.formatQueryParams(data)
 
