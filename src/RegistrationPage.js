@@ -14,6 +14,12 @@ export default class RegistrationPage extends React.Component {
         }
       };
     }
+
+    formatQueryParams(params) {
+      const queryItems = Object.keys(params)
+          .map(key => `${encodeURIComponent(key)}=${encodeURIComponent(params[key])}`)
+      return queryItems.join('&')
+  }
     
     validateEmail(inputEmail){
       let outputEmail = inputEmail;
@@ -80,6 +86,52 @@ export default class RegistrationPage extends React.Component {
 
       //check if the state is populated with the search params data
       console.log(this.state.params)
+
+      const searchURL = 'http://localhost:3000/'
+
+      const queryString = this.formatQueryParams(data)
+
+       //sent all the params to the final url
+       const url = searchURL + '?' + queryString
+
+       console.log(url)
+
+        //define the API call parameters
+        const options = {
+            method: 'POST',
+            header: {
+                "Authorization": "",
+                "Content-Type": "application/json"
+            }
+        }
+
+        //useing the url and paramters above make the api call
+        fetch(url, options)
+
+            // if the api returns data ...
+            .then(res => {
+                if (!res.ok) {
+                    throw new Error('Something went wrong, please try again later.')
+                }
+                 // ... convert it to json
+                 return res.json()
+            })
+                // use the json api output
+            .then(data => {
+
+              //check if there is meaningfull data
+              console.log(data);
+              // check if there are no results
+              if (data.totalItems === 0) {
+                throw new Error('No data found')
+            }
+
+          })
+            .catch(err => {
+              this.setState({
+                error: err.message
+            })
+          })
     }
   
     render() {
@@ -97,13 +149,19 @@ export default class RegistrationPage extends React.Component {
                 type="text"
                 name="username"
                 className="login-input"
-                placeholder="Username"/>
+                placeholder="Username"
+                required/>
                
             </div>
   
             <div className="input-group">
               <label htmlFor="email">Email</label>
-              <input type="text" name="email" className="login-input" placeholder="Email"/>
+              <input 
+              type="text" 
+              name="email" 
+              className="login-input" 
+              placeholder="Email"
+              required/>
             </div>
   
             <div className="input-group">
@@ -112,7 +170,8 @@ export default class RegistrationPage extends React.Component {
                 type="password"
                 name="password"
                 className="login-input"
-                placeholder="Password"/>
+                placeholder="Password"
+                required/>
             </div>
             <button
               type="submit"

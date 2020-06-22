@@ -15,6 +15,12 @@ export default class LoginPage extends React.Component {
       };
     }
 
+    formatQueryParams(params) {
+      const queryItems = Object.keys(params)
+          .map(key => `${encodeURIComponent(key)}=${encodeURIComponent(params[key])}`)
+      return queryItems.join('&')
+    }
+
     validateUsername(inputUsername){
       let outputUsername = inputUsername;
       // only lowercase and uppercase letters and dash
@@ -68,6 +74,51 @@ export default class LoginPage extends React.Component {
 
       //check if the state is populated with the search params data
       console.log(this.state.params)
+
+      const searchURL = 'http://localhost:3000/'
+
+      const queryString = this.formatQueryParams(data)
+
+       //sent all the params to the final url
+      const url = searchURL + '?' + queryString
+
+      console.log(url)
+
+      const options = {
+        method: 'GET',
+        header: {
+            "Authorization": "",
+            "Content-Type": "application/json"
+        }
+    }
+
+    //useing the url and paramters above make the api call
+    fetch(url, options)
+
+        // if the api returns data ...
+        .then(res => {
+            if (!res.ok) {
+                throw new Error('Something went wrong, please try again later.')
+            }
+             // ... convert it to json
+             return res.json()
+        })
+            // use the json api output
+        .then(data => {
+
+          //check if there is meaningfull data
+          console.log(data);
+          // check if there are no results
+          if (data.totalItems === 0) {
+            throw new Error('No user found')
+        }
+
+      })
+        .catch(err => {
+          this.setState({
+            error: err.message
+        })
+      })
     }
   
     render() {
@@ -84,7 +135,8 @@ export default class LoginPage extends React.Component {
                 type="text"
                 name="username"
                 className="login-input"
-                placeholder="Username"/>
+                placeholder="Username"
+                required/>
             </div>
   
             <div className="input-group">
@@ -93,7 +145,8 @@ export default class LoginPage extends React.Component {
                 type="password"
                 name="password"
                 className="login-input"
-                placeholder="Password"/>
+                placeholder="Password"
+                required/>
             </div>
   
             <button
