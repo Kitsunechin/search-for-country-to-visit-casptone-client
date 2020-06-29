@@ -22,7 +22,7 @@ export default class App extends React.Component {
     notes: [],
     folders: []
   }
-  
+  /////neeeded//////
   drawerToggleButton = () => {
     this.setState((prevState) => {
       return {sideDrawerOpen: !prevState.sideDrawerOpen}
@@ -32,7 +32,7 @@ export default class App extends React.Component {
   backdropClickHandler = () => {
     this.setState({sideDrawerOpen: false})
   }
-
+  //////////////////////
   componentDidMount() {
         Promise.all([
             fetch(`${config.API_ENDPOINT}/notes`),
@@ -95,7 +95,7 @@ render() {
     deleteNote: this.handleDeleteNote,
     addErrorNotes: this.addErrorNotes,
     notesError: this.notesError,
-    drawerToggleButton: this.drawerToggleButton,
+    drawerToggleButton: this.drawerToggleButton, ///needed
   }
   console.log(contextValue)
 
