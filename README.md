@@ -56,10 +56,27 @@ The app's functionality includes:
         * __VisitedPage.js__ (stateless) 
 
 ## Business Objects (back-end structure)
-* User (database table)
-    * Username (email validation)
-    * Password (at least 8 chars, at least one alpha and a special character validation)
+* countries (database table)
+    * id 
+    * iso (country iso (2 letters) code)
+    * name (country original name)
+    * nicename (country shortcuted name)
+    * iso3 (country iso3 (3 letters) code)
+    * numcode (country numeric code)
+    * phonecode (country phonecode)
 
+* users (database table)
+    * id 
+    * user_name (only lowercase and uppercase letters and dash)
+    * user_password ( at least one number, one lowercase and one uppercase letter, at least eight characters that are letters, numbers or the underscore)
+    * user_email (email validation)
+
+* users_countries (database table)
+    * id 
+    * user_id (connnection with id from users table)
+    * country_id ( connection with the id from the countries table)
+    * is_visited (boolean default 0,1 if it is visited)
+    * is_wish_list (boolean default 0,1 if it is wishlist)
 
 ## Technology
 * Front-End: HTML5, CSS3, JavaScript ES6, React
