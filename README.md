@@ -85,7 +85,17 @@ The app's functionality includes:
 
 ## API Documentation
 API Documentation details:
-* get all users
+* get all users => /api/users
+* get users by id => /api/users/:user_id
+* get all countries => /api/all
+* get countries by id => /api/all/:country_id
+* post countries => /api/all
+* get visited countries => /api/visited
+* get visited countries by id => /api/visited/:country_id
+* post visited countries => /api/visited
+* get bucket-list countries => /api/bucket-list
+* get bucket-list countries by id => /api/bucket-list/:country_id
+* post visited countries => /api/visited
 
 ## Responsive
 App is built to be usable on mobile devices, as well as responsive across mobile, tablet, laptop, and desktop screen resolutions.

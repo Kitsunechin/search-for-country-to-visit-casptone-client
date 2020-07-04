@@ -10,8 +10,8 @@ export default class LandingPage extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            isLogin: false,
-            isRegister: false
+            isLoginOpen: false,
+            isRegisterOpen: false
         }
     }
 
