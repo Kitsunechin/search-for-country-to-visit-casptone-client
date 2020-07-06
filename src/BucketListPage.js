@@ -11,8 +11,54 @@ class VisitedPage extends React.Component {
       error: null,
       params: {
         selectCountry: ''
-      }
+      },
+      dropDownCountries: []
     };
+  }
+  componentDidMount() {
+    console.log('Stateful component successfully mounted.');
+    const url = `${config.API_ENDPOINT}/all`
+    
+
+    console.log(url)
+
+    const options = {
+      method: 'GET',
+      header: {
+        "Authorization": "",
+        "Content-Type": "application/json"
+      }
+    }
+
+    //useing the url and paramters above make the api call
+    fetch(url, options)
+
+      // if the api returns data ...
+      .then(res => {
+        if (!res.ok) {
+          throw new Error('Something went wrong, please try again later.')
+        }
+        // ... convert it to json
+        return res.json()
+      })
+      // use the json api output
+      .then(data => {
+
+        //check if there is meaningfull data
+        console.log(data);
+        // check if there are no results
+        if (data.totalItems === 0) {
+          throw new Error('No user found')
+        }
+        this.setState({
+          dropDownCountries: data
+        })
+      })
+      .catch(err => {
+        this.setState({
+          error: err.message
+        })
+      })
   }
 
   formatQueryParams(params) {
@@ -26,7 +72,7 @@ class VisitedPage extends React.Component {
     //create an object to store the search filters
     const data = {}
 
-    //get all the from data from the form component
+    //get all the data from the form component and populate object with it
     const formData = new FormData(e.target)
 
     //for each of the keys in form data populate it with form value
@@ -92,16 +138,22 @@ class VisitedPage extends React.Component {
       })
   }
   render() {
+    let listOfCountries = ''
+    if(this.state.dropDownCountries.length !== 0 ){
+      listOfCountries = this.state.dropDownCountries.map((country, key) => {
+      
+    return (
+      <option key={key} value="{country.id}">{country.nicename}</option>
+      )
+    });
+    }
    return (
     <div className="Visited-list">
         <form onSubmit={this.handleSubmit}>
         <label htmlFor="countries">Choose a country:</label>
             <select name="selectCountry"id="countries" required>
                 <option value="">None</option>
-                <option value="Japan">Japan</option>
-                <option value="Poland">Poland</option>
-                <option value="USA">USA</option>
-                <option value="UK">UK</option>
+                {listOfCountries}
             </select>
         <button>Add</button>
       </form>
