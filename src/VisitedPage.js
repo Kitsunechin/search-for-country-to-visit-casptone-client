@@ -10,8 +10,55 @@ class VisitedPage extends React.Component {
       error: null,
       params: {
         selectCountry: ''
-      }
+      },
+      dropDownCountries: []
     };
+  }
+  
+  componentDidMount() {
+    console.log('Stateful component successfully mounted.');
+    const url = `${config.API_ENDPOINT}/visited`
+    
+
+    console.log(url)
+
+    const options = {
+      method: 'GET',
+      header: {
+        "Authorization": "",
+        "Content-Type": "application/json"
+      }
+    }
+
+    //useing the url and paramters above make the api call
+    fetch(url, options)
+
+      // if the api returns data ...
+      .then(res => {
+        if (!res.ok) {
+          throw new Error('Something went wrong, please try again later.')
+        }
+        // ... convert it to json
+        return res.json()
+      })
+      // use the json api output
+      .then(data => {
+
+        //check if there is meaningfull data
+        console.log(data);
+        // check if there are no results
+        if (data.totalItems === 0) {
+          throw new Error('No user found')
+        }
+        this.setState({
+          dropDownCountries: data
+        })
+      })
+      .catch(err => {
+        this.setState({
+          error: err.message
+        })
+      })
   }
 
   formatQueryParams(params) {
@@ -91,28 +138,34 @@ class VisitedPage extends React.Component {
       })
   }
   render() {
+    let listOfCountries = ''
+    if(this.state.dropDownCountries.length !== 0 ){
+      listOfCountries = this.state.dropDownCountries.map((country, key) => {
+      
+    return (
+      <option key={key} value="{country.id}">{country.nicename}</option>
+      )
+    });
+    }
    return (
     <div className="Visited-list">
         <form onSubmit={this.handleSubmit}>
         <label htmlFor="countries">Choose a country:</label>
             <select name="selectCountry"id="countries" required>
                 <option value="">None</option>
-                <option value="Japan">Japan</option>
-                <option value="Poland">Poland</option>
-                <option value="USA">USA</option>
-                <option value="UK">UK</option>
+                {listOfCountries}
             </select>
         <button>Search</button>
       </form>
       <section>
         <header>
             <h3>Wikipedia</h3>
-            <img alt="picture of a country"/>
+            <img alt="a country"/>
         </header>
         <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</p>
       </section>
       <section>
-        <img alt="picture of a map"/>
+        <img alt="a map"/>
       </section>
     </div>
     )

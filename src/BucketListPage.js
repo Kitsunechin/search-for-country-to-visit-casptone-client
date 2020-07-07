@@ -24,7 +24,7 @@ class VisitedPage extends React.Component {
 
     const options = {
       method: 'GET',
-      header: {
+      headers: {
         "Authorization": "",
         "Content-Type": "application/json"
       }
@@ -83,7 +83,9 @@ class VisitedPage extends React.Component {
     let {
       selectCountry,
     } = data
-
+    let countryId = selectCountry.split('_')[0]
+    let countryNicename = selectCountry.split('_')[1]
+    console.log(countryId,countryNicename)
     //assigning the object from the form data to params in the state
     this.setState({
       params: data
@@ -92,58 +94,105 @@ class VisitedPage extends React.Component {
     //check if the state is populated with the search params data
     console.log(this.state.params)
 
-    const searchURL = `${config.API_ENDPOINT}/bucketlist-page`
+    // const searchURL = `${config.API_ENDPOINT}/bucket-list`
 
-    const queryString = this.formatQueryParams(data)
+    // console.log(searchURL)
 
-    //sent all the params to the final url
-    const url = searchURL + '?' + queryString
+    // const queryString = this.formatQueryParams(data)
 
-    console.log(url)
+    // //sent all the params to the final url
+    // const url = searchURL + '?' + queryString
 
-    const options = {
-      method: 'GET',
-      header: {
-        "Authorization": "",
-        "Content-Type": "application/json"
+    // console.log(url)
+
+    // const options = {
+    //   method: 'GET',
+    //   header: {
+    //     "Authorization": "",
+    //     "Content-Type": "application/json"
+    //   }
+    // }
+
+    // //useing the url and paramters above make the api call
+    // fetch(url, options)
+
+    //   // if the api returns data ...
+    //   .then(res => {
+    //     if (!res.ok) {
+    //       throw new Error('Something went wrong, please try again later.')
+    //     }
+    //     // ... convert it to json
+    //     return res.json()
+    //   })
+    //   // use the json api output
+    //   .then(data => {
+
+    //     //check if there is meaningfull data
+    //     console.log(data);
+    //     // check if there are no results
+    //     if (data.totalItems === 0) {
+    //       throw new Error('No user found')
+    //     }
+
+    //   })
+    //   .catch(err => {
+    //     this.setState({
+    //       error: err.message
+    //     })
+    //   })
+////////////////POST REQUEST////////////////////////////
+
+      const newCountry = {
+        id: countryId,  
+        nicename: countryNicename
       }
-    }
+      
+      console.log(newCountry)
 
-    //useing the url and paramters above make the api call
-    fetch(url, options)
-
-      // if the api returns data ...
-      .then(res => {
-        if (!res.ok) {
-          throw new Error('Something went wrong, please try again later.')
+  
+      //useing the url and paramters above make the api call
+      fetch(`${config.API_ENDPOINT}/bucket-list`, {
+        method: 'POST',
+        body: JSON.stringify(newCountry),
+        headers: {
+          'content-type': 'application/json'
         }
-        // ... convert it to json
-        return res.json()
       })
-      // use the json api output
-      .then(data => {
-
-        //check if there is meaningfull data
-        console.log(data);
-        // check if there are no results
-        if (data.totalItems === 0) {
-          throw new Error('No user found')
-        }
-
-      })
-      .catch(err => {
-        this.setState({
-          error: err.message
+  
+        // if the api returns data ...
+        .then(res => {
+          if (!res.ok) {
+            throw new Error('Something went wrong, please try again later.')
+          }
+          // ... convert it to json
+          return res.json()
         })
-      })
+        // use the json api output
+        .then(data => {
+  
+          //check if there is meaningfull data
+          console.log(data);
+          // check if there are no results
+          if (data.totalItems === 0) {
+            throw new Error('No user found')
+          }
+  
+        })
+        .catch(err => {
+          this.setState({
+            error: err.message
+          })
+        })  
   }
+  ///////////////////////////////////////////////////
   render() {
     let listOfCountries = ''
     if(this.state.dropDownCountries.length !== 0 ){
       listOfCountries = this.state.dropDownCountries.map((country, key) => {
-      
+      // console.log(country.id)
+      let valueOutput = `${country.id}_${country.nicename}`
     return (
-      <option key={key} value="{country.id}">{country.nicename}</option>
+      <option key={key} name="nicename" value={valueOutput}>{country.nicename}</option>
       )
     });
     }
@@ -160,12 +209,12 @@ class VisitedPage extends React.Component {
       <section>
         <header>
             <h3>Wikipedia</h3>
-            <img alt="picture of a country"/>
+            <img alt="a country"/>
         </header>
         <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</p>
       </section>
       <section>
-        <img alt="picture of a map"/>
+        <img alt="a map"/>
       </section>
     </div>
     )
