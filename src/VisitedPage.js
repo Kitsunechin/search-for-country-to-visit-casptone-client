@@ -1,5 +1,6 @@
 import React from 'react'
 import config from './config'
+
 import './VisitedPage.css'
 
 //to add user at a later stage
@@ -17,14 +18,14 @@ class VisitedPage extends React.Component {
   
   componentDidMount() {
     console.log('Stateful component successfully mounted.');
-    const url = `${config.API_ENDPOINT}/visited`
+    const url = `${config.API_ENDPOINT}/all`
     
 
     console.log(url)
 
     const options = {
       method: 'GET',
-      header: {
+      headers: {
         "Authorization": "",
         "Content-Type": "application/json"
       }
@@ -84,6 +85,10 @@ class VisitedPage extends React.Component {
       selectCountry,
     } = data
 
+    let countryId = selectCountry.split('_')[0]
+    let countryNicename = selectCountry.split('_')[1]
+    console.log(countryId,countryNicename)
+   
     //assigning the object from the form data to params in the state
     this.setState({
       params: data
@@ -92,25 +97,68 @@ class VisitedPage extends React.Component {
     //check if the state is populated with the search params data
     console.log(this.state.params)
 
-    const searchURL = `${config.API_ENDPOINT}/visited-page`
+    // const searchURL = `${config.API_ENDPOINT}/bucket-list`
 
-    const queryString = this.formatQueryParams(data)
+    // const queryString = this.formatQueryParams(data)
 
-    //sent all the params to the final url
-    const url = searchURL + '?' + queryString
+    // //sent all the params to the final url
+    // const url = searchURL + '?' + queryString
 
-    console.log(url)
+    // console.log(url)
 
-    const options = {
-      method: 'GET',
-      header: {
-        "Authorization": "",
-        "Content-Type": "application/json"
-      }
+    // const options = {
+    //   method: 'GET',
+    //   headers: {
+    //     "Authorization": "",
+    //     "Content-Type": "application/json"
+    //   }
+    // }
+
+    // //useing the url and paramters above make the api call
+    // fetch(url, options)
+
+    //   // if the api returns data ...
+    //   .then(res => {
+    //     if (!res.ok) {
+    //       throw new Error('Something went wrong, please try again later.')
+    //     }
+    //     // ... convert it to json
+    //     return res.json()
+    //   })
+    //   // use the json api output
+    //   .then(data => {
+
+    //     //check if there is meaningfull data
+    //     console.log(data);
+    //     // check if there are no results
+    //     if (data.totalItems === 0) {
+    //       throw new Error('No user found')
+    //     }
+
+    //   })
+    //   .catch(err => {
+    //     this.setState({
+    //       error: err.message
+    //     })
+    //   })
+    ////////////////POST REQUEST////////////////////////////
+
+    const newCountry = {
+      id: countryId,  
+      nicename: countryNicename
     }
+    
+    console.log(newCountry)
+
 
     //useing the url and paramters above make the api call
-    fetch(url, options)
+    fetch(`${config.API_ENDPOINT}/visited`, {
+      method: 'POST',
+      body: JSON.stringify(newCountry),
+      headers: {
+        'content-type': 'application/json'
+      }
+    })
 
       // if the api returns data ...
       .then(res => {
@@ -135,15 +183,16 @@ class VisitedPage extends React.Component {
         this.setState({
           error: err.message
         })
-      })
+      })  
   }
+  ///////////////////////////////////////////////////////
   render() {
     let listOfCountries = ''
     if(this.state.dropDownCountries.length !== 0 ){
       listOfCountries = this.state.dropDownCountries.map((country, key) => {
-      
+        let valueOutput = `${country.id}_${country.nicename}`
     return (
-      <option key={key} value="{country.id}">{country.nicename}</option>
+      <option key={key} value={valueOutput}>{country.nicename}</option>
       )
     });
     }
@@ -155,7 +204,7 @@ class VisitedPage extends React.Component {
                 <option value="">None</option>
                 {listOfCountries}
             </select>
-        <button>Search</button>
+        <button>Add</button>
       </form>
       <section>
         <header>

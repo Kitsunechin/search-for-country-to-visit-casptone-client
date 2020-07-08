@@ -1,7 +1,7 @@
 import React from 'react'
 import config from './config'
 
-import './VisitedPage.css'
+import './BucketListPage'
 
 //to add user at later stage
 class VisitedPage extends React.Component {
