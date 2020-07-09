@@ -170,18 +170,18 @@ class VisitedPage extends React.Component {
         })
         // use the json api output
         .then(data => {
-          console.log(this.state)
+          // console.log(this.state)
           //check if there is meaningfull data
           console.log(data);
-          let existingBucketList = this.state.bucketListCountriesAdded
+          let existingBucketList = this.state.bucketListCountriesAdded.push(data)
           console.log(existingBucketList)
-          let addNewBucketListItem = existingBucketList.push(data)
-          console.log(addNewBucketListItem)
+          // let addNewBucketListItem = existingBucketList.push(data)
+          // console.log(addNewBucketListItem)
 
           this.setState({
-            bucketListCountriesAdded: addNewBucketListItem
+            bucketListCountriesAdded: existingBucketList
           })
-          // console.log(this.state)
+          console.log(this.state)
         })
         .catch(err => {
           this.setState({
