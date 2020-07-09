@@ -12,7 +12,8 @@ class VisitedPage extends React.Component {
       params: {
         selectCountry: ''
       },
-      dropDownCountries: []
+      dropDownCountries: [],
+      bucketListCountriesAdded: []
     };
   }
   componentDidMount() {
@@ -169,14 +170,18 @@ class VisitedPage extends React.Component {
         })
         // use the json api output
         .then(data => {
-  
+          console.log(this.state)
           //check if there is meaningfull data
           console.log(data);
-          // check if there are no results
-          if (data.totalItems === 0) {
-            throw new Error('No user found')
-          }
-  
+          let existingBucketList = this.state.bucketListCountriesAdded
+          console.log(existingBucketList)
+          let addNewBucketListItem = existingBucketList.push(data)
+          console.log(addNewBucketListItem)
+
+          this.setState({
+            bucketListCountriesAdded: addNewBucketListItem
+          })
+          // console.log(this.state)
         })
         .catch(err => {
           this.setState({
