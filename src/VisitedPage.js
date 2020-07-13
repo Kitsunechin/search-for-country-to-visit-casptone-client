@@ -1,5 +1,6 @@
 import React from 'react'
 import config from './config'
+import Iframe from 'react-iframe'
 
 import './VisitedPage.css'
 
@@ -12,7 +13,8 @@ class VisitedPage extends React.Component {
       params: {
         selectCountry: ''
       },
-      dropDownCountries: []
+      dropDownCountries: [],
+      visitedCountriesAdded: []
     };
   }
   
@@ -170,14 +172,13 @@ class VisitedPage extends React.Component {
       })
       // use the json api output
       .then(data => {
-
-        //check if there is meaningfull data
-        console.log(data);
-        // check if there are no results
-        if (data.totalItems === 0) {
-          throw new Error('No user found')
-        }
-
+        let existingVisitedList = this.state.visitedCountriesAdded
+        existingVisitedList.push(data)
+       //set data to state 
+        this.setState({
+          visitedCountriesAdded: existingVisitedList
+        })
+        console.log(this.state)
       })
       .catch(err => {
         this.setState({
@@ -196,6 +197,26 @@ class VisitedPage extends React.Component {
       )
     });
     }
+
+    let showVisitedList = ''
+    if (this.state.visitedCountriesAdded.length !== 0) {
+      showVisitedList = this.state.visitedCountriesAdded.map((country, key) => {
+          // console.log(country.id)
+          let valueOutput = `https://www.google.com/maps/embed/v1/place?key=AIzaSyDfouOPkJqw5K1AKoxQofTjm3jf3dlV4l0&q=${country.nicename}&maptype=roadmap`
+          return (
+              <div key={key}>
+              <h3>{country.nicename}</h3>
+              <Iframe url={valueOutput}
+                      width="100%"
+                      height="150px"
+                      id={key}
+                      className="myClassname"
+                      display="initial"
+                      position="relative"/>
+              </div>
+          )
+      });
+  }
    return (
     <div className="Visited-list">
         <form onSubmit={this.handleSubmit}>
@@ -208,13 +229,8 @@ class VisitedPage extends React.Component {
       </form>
       <section>
         <header>
-            <h3>Wikipedia</h3>
-            <img alt="a country"/>
+            {showVisitedList}
         </header>
-        <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</p>
-      </section>
-      <section>
-        <img alt="a map"/>
       </section>
     </div>
     )
