@@ -19,6 +19,7 @@ class VisitedPage extends React.Component {
   }
   
   componentDidMount() {
+    this.populatevisitedCountry()
     console.log('Stateful component successfully mounted.');
     const url = `${config.API_ENDPOINT}/all`
     
@@ -64,6 +65,51 @@ class VisitedPage extends React.Component {
       })
   }
 
+  populatevisitedCountry() {
+      
+    const url = `${config.API_ENDPOINT}/visited`
+    
+
+    console.log(url)
+
+    const options = {
+      method: 'GET',
+      headers: {
+        "Authorization": "",
+        "Content-Type": "application/json"
+      }
+    }
+
+    //useing the url and paramters above make the api call
+    fetch(url, options)
+
+      // if the api returns data ...
+      .then(res => {
+        if (!res.ok) {
+          throw new Error('Something went wrong, please try again later.')
+        }
+        // ... convert it to json
+        return res.json()
+      })
+      // use the json api output
+      .then(data => {
+
+        //check if there is meaningfull data
+        console.log(data);
+        // check if there are no results
+        if (data.totalItems === 0) {
+          throw new Error('No user found')
+        }
+        this.setState({
+          visitedCountriesAdded: data
+        })
+      })
+      .catch(err => {
+        this.setState({
+          error: err.message
+        })
+      })
+  }
   formatQueryParams(params) {
     const queryItems = Object.keys(params)
       .map(key => `${encodeURIComponent(key)}=${encodeURIComponent(params[key])}`)
@@ -170,34 +216,19 @@ class VisitedPage extends React.Component {
         // ... convert it to json
         return res.json()
       })
-      // use the json api output
+      // use the json api output and assign to a variable
       .then(data => {
-        let existingVisitedList = this.state.visitedCountriesAdded
-        existingVisitedList.push(data)
-       //set data to state 
-        this.setState({
-          visitedCountriesAdded: existingVisitedList
-        })
+        this.populatevisitedCountry()
         console.log(this.state)
       })
       .catch(err => {
         this.setState({
           error: err.message
         })
-      })  
+      }) 
   }
   ///////////////////////////////////////////////////////
   render() {
-    let listOfCountries = ''
-    if(this.state.dropDownCountries.length !== 0 ){
-      listOfCountries = this.state.dropDownCountries.map((country, key) => {
-        let valueOutput = `${country.id}_${country.nicename}`
-    return (
-      <option key={key} value={valueOutput}>{country.nicename}</option>
-      )
-    });
-    }
-
     let showVisitedList = ''
     if (this.state.visitedCountriesAdded.length !== 0) {
       showVisitedList = this.state.visitedCountriesAdded.map((country, key) => {
@@ -216,7 +247,34 @@ class VisitedPage extends React.Component {
               </div>
           )
       });
-  }
+    }
+
+
+    const visitedCountriesArray = [];
+    if (this.state.visitedCountriesAdded.length !== 0) {
+      for (let i=0;i<this.state.visitedCountriesAdded.length;i++) {
+        visitedCountriesArray.push(this.state.visitedCountriesAdded[i].nicename)
+      }
+      
+    }
+    console.log(visitedCountriesArray)
+
+
+    let listOfCountries = ''
+    if(this.state.dropDownCountries.length !== 0 ){
+      listOfCountries = this.state.dropDownCountries.map((country, key) => {
+      // console.log(country.id)
+      let valueOutput = `${country.id}_${country.nicename}`
+      //only display the countries which were not yet added to the bucket list
+      if(!visitedCountriesArray.includes(country.nicename))
+      {
+        return (
+          <option key={key} name="nicename" value={valueOutput}>{country.nicename}</option>
+          )
+      }
+    });
+    }
+
    return (
     <div className="Visited-list">
         <form onSubmit={this.handleSubmit}>

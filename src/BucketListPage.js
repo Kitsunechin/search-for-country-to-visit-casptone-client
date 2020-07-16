@@ -187,7 +187,6 @@ class BucketListPage extends React.Component {
   }
   ///////////////////////////////////////////////////
   render() {
-   
     
     let showBucketList = ''
     if (this.state.bucketListCountriesAdded.length !== 0) {
