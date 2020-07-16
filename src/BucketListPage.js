@@ -19,6 +19,7 @@ class BucketListPage extends React.Component {
   }
   componentDidMount() {
     console.log('Stateful component successfully mounted.');
+    //populate dropdown list with countries
     const url = `${config.API_ENDPOINT}/all`
     
 
@@ -54,6 +55,54 @@ class BucketListPage extends React.Component {
         }
         this.setState({
           dropDownCountries: data
+        })
+      })
+      .catch(err => {
+        this.setState({
+          error: err.message
+        })
+      })
+
+      this.populateBucketListCountry()
+  }
+
+  populateBucketListCountry() {
+      
+    const url = `${config.API_ENDPOINT}/bucket-list`
+    
+
+    console.log(url)
+
+    const options = {
+      method: 'GET',
+      headers: {
+        "Authorization": "",
+        "Content-Type": "application/json"
+      }
+    }
+
+    //useing the url and paramters above make the api call
+    fetch(url, options)
+
+      // if the api returns data ...
+      .then(res => {
+        if (!res.ok) {
+          throw new Error('Something went wrong, please try again later.')
+        }
+        // ... convert it to json
+        return res.json()
+      })
+      // use the json api output
+      .then(data => {
+
+        //check if there is meaningfull data
+        console.log(data);
+        // check if there are no results
+        if (data.totalItems === 0) {
+          throw new Error('No user found')
+        }
+        this.setState({
+          bucketListCountriesAdded: data
         })
       })
       .catch(err => {
@@ -125,12 +174,7 @@ class BucketListPage extends React.Component {
         })
         // use the json api output and assign to a variable
         .then(data => {
-          let existingBucketList = this.state.bucketListCountriesAdded
-          existingBucketList.push(data)
-         //set data to state 
-          this.setState({
-            bucketListCountriesAdded: existingBucketList
-          })
+          this.populateBucketListCountry()
           console.log(this.state)
         })
         .catch(err => {
@@ -161,7 +205,7 @@ class BucketListPage extends React.Component {
               <h3>{country.nicename}</h3>
               <Iframe url={valueOutput}
                       width="100%"
-                      height="150px"
+                      height="250px"
                       id={key}
                       className="myClassname"
                       display="initial"
