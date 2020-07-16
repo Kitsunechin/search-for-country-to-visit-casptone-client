@@ -18,6 +18,8 @@ class BucketListPage extends React.Component {
     };
   }
   componentDidMount() {
+    this.populateBucketListCountry()
+    
     console.log('Stateful component successfully mounted.');
     //populate dropdown list with countries
     const url = `${config.API_ENDPOINT}/all`
@@ -63,7 +65,7 @@ class BucketListPage extends React.Component {
         })
       })
 
-      this.populateBucketListCountry()
+      
   }
 
   populateBucketListCountry() {
@@ -185,16 +187,8 @@ class BucketListPage extends React.Component {
   }
   ///////////////////////////////////////////////////
   render() {
-    let listOfCountries = ''
-    if(this.state.dropDownCountries.length !== 0 ){
-      listOfCountries = this.state.dropDownCountries.map((country, key) => {
-      // console.log(country.id)
-      let valueOutput = `${country.id}_${country.nicename}`
-    return (
-      <option key={key} name="nicename" value={valueOutput}>{country.nicename}</option>
-      )
-    });
-    }
+   
+    
     let showBucketList = ''
     if (this.state.bucketListCountriesAdded.length !== 0) {
       showBucketList = this.state.bucketListCountriesAdded.map((country, key) => {
@@ -213,7 +207,33 @@ class BucketListPage extends React.Component {
               </div>
           )
       });
-  }
+    }
+
+
+    const bucketListCountriesArray = [];
+    if (this.state.bucketListCountriesAdded.length !== 0) {
+      for (let i=0;i<this.state.bucketListCountriesAdded.length;i++) {
+        bucketListCountriesArray.push(this.state.bucketListCountriesAdded[i].nicename)
+      }
+      
+    }
+    console.log(bucketListCountriesArray)
+
+
+    let listOfCountries = ''
+    if(this.state.dropDownCountries.length !== 0 ){
+      listOfCountries = this.state.dropDownCountries.map((country, key) => {
+      // console.log(country.id)
+      let valueOutput = `${country.id}_${country.nicename}`
+      //only display the countries which were not yet added to the bucket list
+      if(!bucketListCountriesArray.includes(country.nicename))
+      {
+        return (
+          <option key={key} name="nicename" value={valueOutput}>{country.nicename}</option>
+          )
+      }
+    });
+    }
    return (
     <div className="Visited-list">
         <form onSubmit={this.handleSubmit}>
