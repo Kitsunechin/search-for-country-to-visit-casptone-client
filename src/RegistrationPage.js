@@ -1,5 +1,7 @@
 import React from 'react'
 import config from './config'
+import AuthApiService from './services/auth-api-service';
+import TokenService from './services/token-service.js';
 
 import './LandingPage.css'
 export default class RegistrationPage extends React.Component {
@@ -85,54 +87,24 @@ export default class RegistrationPage extends React.Component {
           params: data
       })
 
-      //check if the state is populated with the search params data
-      console.log(this.state.params)
+    this.setState({ error: null })
+    AuthApiService.postUser({
+        user_name: username,
+        user_email: email,
+        user_password: password,
+    })
 
-      const searchURL = `${config.API_ENDPOINT}/registration-page`
+      .then(response => {
+          console.log('user:', response)
+          TokenService.saveAuthToken(response.authToken)
+          TokenService.saveUserId(response.id)
+          window.location = '/visited'
+      }) 
 
-      const queryString = this.formatQueryParams(data)
+      .catch(res => {
+          this.setState({ error: res.error })
+      })  
 
-       //sent all the params to the final url
-       const url = searchURL + '?' + queryString
-
-       console.log(url)
-
-        //define the API call parameters
-        const options = {
-            method: 'POST',
-            header: {
-                "Authorization": "",
-                "Content-Type": "application/json"
-            }
-        }
-
-        //useing the url and paramters above make the api call
-        fetch(url, options)
-
-            // if the api returns data ...
-            .then(res => {
-                if (!res.ok) {
-                    throw new Error('Something went wrong, please try again later.')
-                }
-                 // ... convert it to json
-                 return res.json()
-            })
-                // use the json api output
-            .then(data => {
-
-              //check if there is meaningfull data
-              console.log(data);
-              // check if there are no results
-              if (data.totalItems === 0) {
-                throw new Error('No data found')
-            }
-
-          })
-            .catch(err => {
-              this.setState({
-                error: err.message
-            })
-          })
     }
   
     render() {
@@ -140,6 +112,7 @@ export default class RegistrationPage extends React.Component {
       const errorMessage = this.state.error ? <p className="error-message">{this.state.error}</p> : false
       return (
         <div className="inner-container">
+          {TokenService.getUserId()} 
           <form className="add-user" onSubmit={this.handleSubmit}>
           {errorMessage}
           <div className="box">

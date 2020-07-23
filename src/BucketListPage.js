@@ -1,6 +1,8 @@
 import React from 'react'
 import config from './config'
 import Iframe from 'react-iframe'
+import AuthApiService from './services/auth-api-service';
+import TokenService from './services/token-service.js';
 
 import './BucketListPage'
 
@@ -235,6 +237,7 @@ class BucketListPage extends React.Component {
     }
    return (
     <div className="Visited-list">
+      {TokenService.getUserId()} 
         <form onSubmit={this.handleSubmit}>
         <label htmlFor="countries">Choose a country:</label>
             <select name="selectCountry"id="countries" required>

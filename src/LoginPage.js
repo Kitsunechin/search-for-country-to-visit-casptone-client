@@ -1,6 +1,8 @@
 import React from 'react'
 import {Link} from 'react-router-dom';
 import config from './config'
+import TokenService from './services/token-service';
+import AuthApiService from './services/auth-api-service';
 
 import './LandingPage.css'
 export default class LoginPage extends React.Component {
@@ -11,7 +13,6 @@ export default class LoginPage extends React.Component {
         error: null,
         params: {
           username: '',
-          email: '',
           password: ''
         }
       };
@@ -77,50 +78,27 @@ export default class LoginPage extends React.Component {
       //check if the state is populated with the search params data
       console.log(this.state.params)
 
-      const searchURL = `${config.API_ENDPOINT}/login-page`
-
-      const queryString = this.formatQueryParams(data)
-
-       //sent all the params to the final url
-      const url = searchURL + '?' + queryString
-
-      console.log(url)
-
-      const options = {
-        method: 'GET',
-        header: {
-            "Authorization": "",
-            "Content-Type": "application/json"
-        }
-    }
-
-    //useing the url and paramters above make the api call
-    fetch(url, options)
-
-        // if the api returns data ...
-        .then(res => {
-            if (!res.ok) {
-                throw new Error('Something went wrong, please try again later.')
-            }
-             // ... convert it to json
-             return res.json()
-        })
-            // use the json api output
-        .then(data => {
-
-          //check if there is meaningfull data
-          console.log(data);
-          // check if there are no results
-          if (data.totalItems === 0) {
-            throw new Error('No user found')
-        }
-
+      this.setState({ error: null })
+      AuthApiService.postLogin({
+        user_name: username,
+        user_password: password,
       })
-        .catch(err => {
-          this.setState({
-            error: err.message
-        })
+  
+      .then(response => {
+        console.log("response ID", response)
+        username = ''
+        password = ''
+        TokenService.saveAuthToken(response.authToken)
+        TokenService.saveUserId(response.userId)
+        window.location ='/visited'
       })
+      .then(response => {
+        console.log("response:",response)
+      })
+      .catch(err => {
+        console.log(err);
+      });   
+     
     }
   
     render() {
@@ -130,7 +108,7 @@ export default class LoginPage extends React.Component {
           <form className="add-user" onSubmit={this.handleSubmit}>
           {errorMessage}
           <div className="box">
-          
+          {TokenService.getUserId()}
             <div className="input-group">
               <label htmlFor="username">Username</label>
               <input

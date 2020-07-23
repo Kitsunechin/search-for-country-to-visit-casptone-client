@@ -1,27 +1,46 @@
-import React from 'react'
+import React, {Component} from 'react'
 import {NavLink} from 'react-router-dom'
 import {Link} from 'react-router-dom';
+import AuthApiService from './services/auth-api-service';
+import TokenService from './services/token-service.js';
+import AppContext from './AppContext';
 
 import DrawerToggleButton from './DrawerToggleButton'
 import './Navigation.css'
 
 
-const Navigation = (props) => (
-            <div className='outer-nav toolbar'>
-            <nav className='toolbar_navigation'>
-            <div className='toolbar-toggle'>
-                 <DrawerToggleButton click={props.drawerClickHandler}/>
+class Navigation extends Component  {
+    static contextType = AppContext
+    logOutClick = () => {
+      console.log('Logging out')
+      TokenService.clearAuthToken()
+      TokenService.getUserId = (id) => {
+        // console.log(id)
+      }
+  
+      window.location='/'
+    }
+  
+    render(){
+        return( 
+           <div className='outer-nav toolbar'>
+                <nav className='toolbar_navigation'>
+                    <div className='toolbar-toggle'>
+                        <DrawerToggleButton click={this.context.drawerToggleButton}/>
+                    </div>
+                        <Link className='nav_logo'to='/'><h2>Logo</h2></Link>
+                    <div className='spacer'></div>
+                    <div className='nav'>
+                        <NavLink className='nav-link' to='/'><h3>Home</h3></NavLink>
+                        <NavLink className='nav-link' to='/visited'><h3>Visited</h3></NavLink>
+                        <NavLink className='nav-link' to='/bucket-list'><h3>Bucket List</h3></NavLink>
+                        <NavLink to="/" onClick={this.logOutClick}>Log Out</NavLink>
+                    </div>
+                </nav>
             </div>
-                <Link className='nav_logo'to='/'><h2>Logo</h2></Link>
-            <div className='spacer'></div>
-            <div className='nav'>
-                <NavLink className='nav-link' to='/'><h3>Home</h3></NavLink>
-                <NavLink className='nav-link' to='/visited'><h3>Visited</h3></NavLink>
-                <NavLink className='nav-link' to='/bucket-list'><h3>Bucket List</h3></NavLink>
-            </div>
-            </nav>
-            </div>
-)
+        )
+   }
+}
 
 
 export default Navigation
