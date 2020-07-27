@@ -194,7 +194,8 @@ class VisitedPage extends React.Component {
     ////////////////POST REQUEST////////////////////////////
 
     const newCountry = {
-      id: countryId,  
+      id: countryId,
+      user_id: TokenService.getUserId(), 
       nicename: countryNicename
     }
     
