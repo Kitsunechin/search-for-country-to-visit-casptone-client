@@ -69,7 +69,7 @@ class VisitedPage extends React.Component {
 
   populatevisitedCountry() {
       
-    const url = `${config.API_ENDPOINT}/visited`
+    const url = `${config.API_ENDPOINT}/visited/user/${TokenService.getUserId()}`
     
 
     console.log(url)
@@ -147,50 +147,7 @@ class VisitedPage extends React.Component {
     //check if the state is populated with the search params data
     console.log(this.state.params)
 
-    // const searchURL = `${config.API_ENDPOINT}/bucket-list`
-
-    // const queryString = this.formatQueryParams(data)
-
-    // //sent all the params to the final url
-    // const url = searchURL + '?' + queryString
-
-    // console.log(url)
-
-    // const options = {
-    //   method: 'GET',
-    //   headers: {
-    //     "Authorization": "",
-    //     "Content-Type": "application/json"
-    //   }
-    // }
-
-    // //useing the url and paramters above make the api call
-    // fetch(url, options)
-
-    //   // if the api returns data ...
-    //   .then(res => {
-    //     if (!res.ok) {
-    //       throw new Error('Something went wrong, please try again later.')
-    //     }
-    //     // ... convert it to json
-    //     return res.json()
-    //   })
-    //   // use the json api output
-    //   .then(data => {
-
-    //     //check if there is meaningfull data
-    //     console.log(data);
-    //     // check if there are no results
-    //     if (data.totalItems === 0) {
-    //       throw new Error('No user found')
-    //     }
-
-    //   })
-    //   .catch(err => {
-    //     this.setState({
-    //       error: err.message
-    //     })
-    //   })
+    
     ////////////////POST REQUEST////////////////////////////
 
     const newCountry = {

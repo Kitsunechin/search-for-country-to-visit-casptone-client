@@ -72,7 +72,7 @@ class BucketListPage extends React.Component {
 
   populateBucketListCountry() {
       
-    const url = `${config.API_ENDPOINT}/bucket-list`
+    const url = `${config.API_ENDPOINT}/bucket-list/user/${TokenService.getUserId()}`
     
 
     console.log(url)
@@ -152,7 +152,8 @@ class BucketListPage extends React.Component {
 ////////////////POST REQUEST////////////////////////////
 
       const newCountry = {
-        id: countryId,  
+        id: countryId,
+        user_id: TokenService.getUserId(),   
         nicename: countryNicename
       }
       
