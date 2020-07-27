@@ -1,11 +1,23 @@
-import React from 'react'
+import React, {Component} from 'react'
 import {NavLink} from 'react-router-dom'
+import AuthApiService from './services/auth-api-service';
+import TokenService from './services/token-service.js';
 
 import './SideDrawer.css'
 
-const SideDrawer = props => {
-    let drawerClasses = 'side-drawer';
-    if (props.show) {
+class SideDrawer extends Component {
+    logOutClick = () => {
+        console.log('Logging out')
+        TokenService.clearAuthToken()
+        TokenService.getUserId = (id) => {
+          // console.log(id)
+        }
+    
+        window.location='/'
+      }
+    render() {
+        let drawerClasses = 'side-drawer';
+    if (this.props.show) {
         drawerClasses = 'side-drawer open'
     }
     return(
@@ -14,8 +26,10 @@ const SideDrawer = props => {
         <NavLink className='nav-link' to='/'><h3>Home</h3></NavLink>
         <NavLink className='nav-link' to='/visited'><h3>Visited</h3></NavLink>
         <NavLink className='nav-link' to='/bucket-list'><h3>Bucket List</h3></NavLink>
+        <NavLink className='nav-link' to="/" onClick={this.logOutClick}><h3>Log Out</h3></NavLink>
         </div>
     </nav>
     )
+    }
 }
 export default SideDrawer
