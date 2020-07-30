@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function NotePage() {
+export default function NotFoundPage() {
         return(
             <div>
                 404 Page not Found

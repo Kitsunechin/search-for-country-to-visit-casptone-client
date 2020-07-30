@@ -2,6 +2,7 @@ import React from 'react'
 import config from './config'
 import AuthApiService from './services/auth-api-service';
 import TokenService from './services/token-service.js';
+import './LandingPage.css'
 
 import './LandingPage.css'
 export default class RegistrationPage extends React.Component {

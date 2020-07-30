@@ -8,3 +8,9 @@ body {
     margin-left: auto;
     padding-top: 100px;
 }
+
+button {
+    padding: 2px;
+    border-radius: 1px;
+    border: none
+}

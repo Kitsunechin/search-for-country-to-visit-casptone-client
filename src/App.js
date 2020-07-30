@@ -1,9 +1,10 @@
 import React from 'react';
-import { Route, Switch } from 'react-router-dom'
+import { Route, Switch, Redirect} from 'react-router-dom'
 
 import config from './config'
 import './App.css';
 import AppContext from './AppContext';
+import TokenService from './services/token-service.js';
 
 import NotFoundPage from './NotFoundPage'
 import LandingPage from './LandingPage'
@@ -18,9 +19,6 @@ export default class App extends React.Component {
   
   state = {
     sideDrawerOpen: false,
-    // store: STORE,
-    notes: [],
-    folders: []
   }
   /////neeeded//////
   drawerToggleButton = () => {
@@ -33,67 +31,17 @@ export default class App extends React.Component {
     this.setState({sideDrawerOpen: false})
   }
   //////////////////////
-  componentDidMount() {
-        Promise.all([
-            fetch(`${config.API_ENDPOINT}/notes`),
-            fetch(`${config.API_ENDPOINT}/folders`)
-        ])
-            .then(([notesRes, foldersRes]) => {
-                if (!notesRes.ok)
-                    return notesRes.json().then(e => Promise.reject(e));
-                if (!foldersRes.ok)
-                    return foldersRes.json().then(e => Promise.reject(e));
 
-                return Promise.all([notesRes.json(), foldersRes.json()]);
-            })
-            .then(([notes, folders]) => {
-              console.log(folders,notes)
-                this.setState({notes: notes, folders: folders});
-        
-            })
-            .catch(error => {
-                console.error({error});
-            });
-    }
-    
-    addFolder = folder => {
-      this.setState({
-        folders: [...this.state.folders, folder],
-      })
-    }
-    
-    addNote = note => {
-      this.setState({
-        notes: [...this.state.notes, note],
-      })
-    }
-
-    handleDeleteNote = noteId => {
-      const newNotes = this.state.notes.filter(note => {
-        return note.id !== noteId;
-      });
-  
-      this.setState({
-        notes: newNotes
-      })
-    }
   
     addErrorNotes = error => {
       this.setState(error);
     };
-  
 
 
 render() {
   // const {store} = this.state
   // console.log(`these are notes and folders ${this.state.notes}${this.state.folders}`)
   const contextValue = {
-    notes: this.state.notes,
-    folders: this.state.folders,
-    addFolder: this.addFolder,
-    addNote: this.addNote,
-    deleteNote: this.handleDeleteNote,
-    addErrorNotes: this.addErrorNotes,
     notesError: this.notesError,
     drawerToggleButton: this.drawerToggleButton, ///needed
   }
@@ -118,11 +66,15 @@ render() {
             return <LandingPage />
           }}/>
           <Route path='/visited' render={() => {
-            return <VisitedPage />
+            return (TokenService.hasAuthToken()
+              ? <VisitedPage />
+              : <Redirect to={{pathname: '/'}} />)
           }}/>
           <Route path='/bucket-list' render={() => {
-            return <BucketListPage />
-          }}/>
+              return (TokenService.hasAuthToken()
+              ? <BucketListPage />
+              : <Redirect to={{pathname: '/'}} />)
+          }} />
           />
          <Route component={NotFoundPage} />
         </Switch>

@@ -29,13 +29,13 @@ class Navigation extends Component  {
                         <DrawerToggleButton click={this.context.drawerToggleButton}/>
                     </div>
                         <Link className='nav_logo'to='/'><h2>Logo</h2></Link>
-                    <div className='spacer'></div>
-                    <div className='nav'>
+                        {TokenService.hasAuthToken() ? <div className='spacer'></div> : ''}
+                        {TokenService.hasAuthToken() ? <div className='nav'>
                         <NavLink className='nav-link' to='/'><h3>Home</h3></NavLink>
                         <NavLink className='nav-link' to='/visited'><h3>Visited</h3></NavLink>
                         <NavLink className='nav-link' to='/bucket-list'><h3>Bucket List</h3></NavLink>
                         <NavLink className='nav-link' to="/" onClick={this.logOutClick}><h3>Log Out</h3></NavLink>
-                    </div>
+                    </div> : ''}
                 </nav>
             </div>
         )
