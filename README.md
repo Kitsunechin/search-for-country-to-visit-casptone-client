@@ -6,12 +6,44 @@ You can access a working prototype of the React app here: https://your-app-clien
 
 
 ## User Stories
-This app is for two types of users: a visitor and a logged-in user
+This app is for logged in users only
 
 #### Landing Page
-* as a visitor
-* I want to understand what I can do with this app (or sign up, or log in)
-* so I can decide if I want to use it
+* As a new user 
+* I would like to understand what the page is about
+* As a new user 
+* I want to be able to create a new account
+* As a new user and returning user 
+* I would like to be able to log out of my account
+* As a returning user 
+* I want to be able to sign in into my account
+* As a new and returning user 
+
+#### Visited Page
+* I want to be able to view a list of countries which I have visited
+* As a new and returning user 
+* I would like to be able to add new countries to the list of visited countries
+
+#### Bucket-List Page
+* As a new and returning user 
+* I want to be able to see countries which I would like to visit in the future displayed
+* As a new and returning user 
+* I would like to be able to pick a new country and add it to my “to visit” countries list
+* As a new and returning user I would like to view a map with the places I would like to visit in the future
+
+#### Mobile Version
+* As a new and returning user 
+* I would like to view the website on both mobile devices and desktop computers
+
+#### Accessibility
+* As a user with disabilities 
+* I would like to navigate the website with the use of keyboard
+* As a user with disabilities 
+* I would like for the website to keep high contrast for visibility
+* As a user with disabilities 
+* I would like for the website to be accessible (ARIA)
+* As a user with disabilities 
+* I would like for the website to be well structured for the screen readers’s accesibility
 
 
 
@@ -61,19 +93,24 @@ Sidedrawer View
 ## Functionality
 The app's functionality includes:
 * Every User has the ability to create an account
+* Every user can log in to his/her account 
+* Every user can view his/her bucket-list countries
+* Every user can add countries to the bucket-list countries
+* Every user can view his/her visited countries
+* Every user can add countries to the visited countries
 
 ## React Components Structure
 * __Index.js__ (stateless)
     * __App.js__ (statfull)
         * __LandingPage.js__ (statefull)
-            * __RegistartionPage.js__ (stateless)
-            * __LoginPage.js__ (stateless)
+            * __RegistartionPage.js__ (statefull)
+            * __LoginPage.js__ (statefull)
         * __Navigation.js__ (stateless)
             * __Backdrop.js__ (stateless) 
             * __SideDrawer.js__ (stateless)
             * __DrawerToggleButton.js__ (stateless)
-        * __BucketListPage.js__ (stateless) 
-        * __VisitedPage.js__ (stateless) 
+        * __BucketListPage.js__ (statefull) 
+        * __VisitedPage.js__ (statefull) 
 
 ## Business Objects (back-end structure)
 * countries (database table)
@@ -122,7 +159,10 @@ App is built to be usable on mobile devices, as well as responsive across mobile
 
 ## Development Roadmap
 This is v1.0 of the app, but future enhancements are expected to include:
-* add more functionality
+* add additional info on the visited countries(summary of the visit, pictures,)
+* add additional info on the bucket-list countries(time of planned visit, summary of the planned visit)
+* adding a delete button to the bucket-list countries
+
 
 ## How to run it
 Use command line to navigate into the project folder and run the following in terminal
