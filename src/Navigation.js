@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {NavLink} from 'react-router-dom'
 import {Link} from 'react-router-dom';
-import AuthApiService from './services/auth-api-service';
+
 import TokenService from './services/token-service.js';
 import AppContext from './AppContext';
 
@@ -28,7 +28,7 @@ class Navigation extends Component  {
                     <div className='toolbar-toggle'>
                         <DrawerToggleButton click={this.context.drawerToggleButton}/>
                     </div>
-                        <Link className='nav_logo'to='/'><h2>Logo</h2></Link>
+                        <Link className='nav_logo'to='/'><h2 className="logo">Trippster</h2></Link>
                         {TokenService.hasAuthToken() ? <div className='spacer'></div> : ''}
                         {TokenService.hasAuthToken() ? <div className='nav'>
                         <NavLink className='nav-link' to='/'><h3>Home</h3></NavLink>

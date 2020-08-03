@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route, Switch, Redirect} from 'react-router-dom'
 
-import config from './config'
+// import config from './config'
 import './App.css';
 import AppContext from './AppContext';
 import TokenService from './services/token-service.js';
@@ -20,7 +20,7 @@ export default class App extends React.Component {
   state = {
     sideDrawerOpen: false,
   }
-  /////neeeded//////
+  /////needed//////
   drawerToggleButton = () => {
     this.setState((prevState) => {
       return {sideDrawerOpen: !prevState.sideDrawerOpen}
@@ -30,19 +30,12 @@ export default class App extends React.Component {
   backdropClickHandler = () => {
     this.setState({sideDrawerOpen: false})
   }
-  //////////////////////
-
-  
-    addErrorNotes = error => {
-      this.setState(error);
-    };
 
 
 render() {
   // const {store} = this.state
   // console.log(`these are notes and folders ${this.state.notes}${this.state.folders}`)
   const contextValue = {
-    notesError: this.notesError,
     drawerToggleButton: this.drawerToggleButton, ///needed
   }
   console.log(contextValue)

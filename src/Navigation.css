@@ -32,8 +32,14 @@
 .nav_logo {
     color: rebeccapurple;
     text-decoration: none;
-    font-size: 1.5rem;
+    font-size: 1rem;
     margin-left: 1rem
+}
+
+.logo {
+    font-style: italic;
+    font-weight: 400;
+    letter-spacing: -1px;
 }
 
 .spacer {

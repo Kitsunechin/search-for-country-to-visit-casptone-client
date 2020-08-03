@@ -33,9 +33,29 @@ Bucket list View
 ![Bucket list View](/github-images/wireframes/bucket-list-view.jpg)
 
 ## Screenshots
+Landing Page
+:-------------------------:
+![Landing Page](/github-images/screenshots/landing-page.png)
+
 Landing/Login Page
 :-------------------------:
-![Landing Page](/github-images/screenshots/login-page-screenshot.png)
+![Landing/Login Page](/github-images/screenshots/login-view.png)
+
+Landing/Registration
+:-------------------------:
+![Landing/Registration Page](/github-images/screenshots/registartion-view.png)
+
+Visited Countries View
+:-------------------------:
+![Visited Countries View](/github-images/screenshots/visited-countries-view.png)
+
+Bucket list View
+:-------------------------:
+![Bucket list View](/github-images/screenshots/bucket-List-view.png)
+
+Sidedrawer View
+:-------------------------:
+![Sidedrawer View](/github-images/screenshots/sidedrawer-view.png)
 
 
 ## Functionality

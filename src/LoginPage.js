@@ -1,6 +1,5 @@
 import React from 'react'
-import {Link} from 'react-router-dom';
-import config from './config'
+
 import TokenService from './services/token-service';
 import AuthApiService from './services/auth-api-service';
 
@@ -108,7 +107,7 @@ export default class LoginPage extends React.Component {
           <form className="add-user" onSubmit={this.handleSubmit}>
           {errorMessage}
           <div className="box">
-          {TokenService.getUserId()}
+          {/* {TokenService.getUserId()} */}
             <div className="input-group">
               <label htmlFor="username">Username</label>
               <input

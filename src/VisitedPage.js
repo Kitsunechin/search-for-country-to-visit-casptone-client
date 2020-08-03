@@ -237,16 +237,16 @@ class VisitedPage extends React.Component {
 
    return (
     <div className="Visited-list">
-      {TokenService.getUserId()} 
+      {/* {TokenService.getUserId()}  */}
         <form onSubmit={this.handleSubmit}>
         <label htmlFor="countries">Choose a country:</label>
-            <select name="selectCountry"id="countries" required>
+            <select name="selectCountry" aria-controls="countryView" id="countries" required>
                 <option value="">None</option>
                 {listOfCountries}
             </select>
         <button>Add</button>
       </form>
-      <section>
+      <section id="countryView" aria-live="polite">
         <header>
             {showVisitedList}
         </header>

@@ -1,8 +1,7 @@
 import React from 'react'
-import config from './config'
+
 import AuthApiService from './services/auth-api-service';
 import TokenService from './services/token-service.js';
-import './LandingPage.css'
 
 import './LandingPage.css'
 export default class RegistrationPage extends React.Component {
@@ -113,7 +112,7 @@ export default class RegistrationPage extends React.Component {
       const errorMessage = this.state.error ? <p className="error-message">{this.state.error}</p> : false
       return (
         <div className="inner-container">
-          {TokenService.getUserId()} 
+          {/* {TokenService.getUserId()}  */}
           <form className="add-user" onSubmit={this.handleSubmit}>
           {errorMessage}
           <div className="box">
