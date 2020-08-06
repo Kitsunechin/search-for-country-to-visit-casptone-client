@@ -1,8 +1,8 @@
 # Search for Country to Visit
-The app allows its users to search for countries and add them to their backetlist
+The app allows its users to search for countries and add them to their bucket-list
 
 ## Working Prototype
-You can access a working prototype of the React app here: https://your-app-client.herokuapp.com/ and Node app here: https://country-search-server-app.herokuapp.com/
+You can access a working prototype of the React app here: https://search-for-country-capstone.herokuapp.com/ and Node app here: https://country-search-server-app.herokuapp.com
 
 
 ## User Stories
