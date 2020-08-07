@@ -3,7 +3,7 @@ import config from './config'
 import Iframe from 'react-iframe'
 import TokenService from './services/token-service.js';
 
-import './BucketListPage'
+import './BucketListPage.css'
 
 //to add user at later stage
 class BucketListPage extends React.Component {
