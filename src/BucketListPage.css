@@ -9,7 +9,11 @@ body {
 }
 
 button {
-    padding: 2px;
-    border-radius: 1px;
+    padding: 8px;
+    border-radius: 5px;
     border: none
+}
+
+label {
+    font-weight: bolder;
 }
