@@ -16,7 +16,7 @@ class BucketListPage extends React.Component {
       },
       dropDownCountries: [],
       bucketListCountriesAdded: [],
-      value: ''
+      noteAdded: ''
     };
   }
   componentDidMount() {
@@ -63,7 +63,48 @@ class BucketListPage extends React.Component {
       })
 
       
+  ////////////////GET REQUEST FOR NOTES///////////////////////////
+  const url_notes = `${config.API_ENDPOINT}/notes`
+
+  const options_notes = {
+    method: 'GET',
+    headers: {
+      "Authorization": "",
+      "Content-Type": "application/json"
+    }
   }
+
+  //using the url and paramters above make the api call
+  fetch(url_notes, options_notes)
+
+    // if the api returns data ...
+    .then(res => {
+      if (!res.ok) {
+        throw new Error('Something went wrong, please try again later.')
+      }
+      // ... convert it to json
+      return res.json()
+    })
+    // use the json api output
+    .then(data => {
+      console.log(data)
+      //check if there is meaningfull data
+      // check if there are no results
+      if (data.totalItems === 0) {
+        throw new Error('No user found')
+      }
+      this.setState({
+        noteAdded: data
+      })
+    console.log(this.state)
+    })
+    .catch(err => {
+      this.setState({
+        error: err.message
+      })
+    })
+}
+///////////////////////////////////////////////////
 
   populateBucketListCountry() {
       
@@ -174,13 +215,65 @@ class BucketListPage extends React.Component {
         })  
   }
 
-  handleChange = (event) => {
-    this.setState({value: event.target.value});
-  }
 
-  handleAddNote = (event) => {
-    alert(this.state.value);
-    event.preventDefault();
+  handleAddNote = (e) => {
+    e.preventDefault();
+    //create an object to store the search filters
+    const data = {}
+
+    //get all the from data from the form component
+    const formData = new FormData(e.target)
+
+    //for each of the keys in form data populate it with form value
+    for (let value of formData) {
+      data[value[0]] = value[1]
+    }
+    let {
+      noteArea,
+      country_id
+    } = data
+  
+    //assigning the object from the form data to params in the state
+    this.setState({
+      noteAdded: data
+    })
+    
+    
+    ////////////////POST REQUEST FOR NOTES////////////////////////////
+
+    const newNote = {
+      user_country_id: country_id, 
+      note_content: noteArea
+    }
+
+
+    //useing the url and paramters above make the api call
+    fetch(`${config.API_ENDPOINT}/notes`, {
+      method: 'POST',
+      body: JSON.stringify(newNote),
+      headers: {
+        'content-type': 'application/json'
+      }
+    })
+
+      // if the api returns data ...
+      .then(res => {
+        if (!res.ok) {
+          throw new Error('Something went wrong, please try again later.')
+        }
+        // ... convert it to json
+        return res.json()
+      })
+      // use the json api output and assign to a variable
+      .then(data => {
+        console.log(data)
+        window.location = `/visited`
+      })
+      .catch(err => {
+        this.setState({
+          error: err.message
+        })
+      }) 
   }
   ///////////////////////////////////////////////////
   render() {
@@ -189,6 +282,31 @@ class BucketListPage extends React.Component {
     if (this.state.bucketListCountriesAdded.length !== 0) {
       showBucketList = this.state.bucketListCountriesAdded.map((country, key) => {
           let valueOutput = `https://www.google.com/maps/embed/v1/place?key=AIzaSyDfouOPkJqw5K1AKoxQofTjm3jf3dlV4l0&q=${country.nicename}&maptype=roadmap`
+          ////display note /////////////////////////
+          //if there are more than one objects in the array map them
+          let showNote = ''
+            if (this.state.noteAdded.length >1) {
+              showNote = this.state.noteAdded.map((note, key) => {
+              
+                if(note.user_country_id == country.country_id) {
+                  return (
+                    <div key={key}>
+                    <p>{note.note_content}</p>
+                    </div>)
+                }
+                
+              })
+            }
+            //if there is just one object in the array show that
+            else if (this.state.noteAdded.length == 1) {
+              showNote =   `<div key={key}>
+                  <p>${this.state.noteAdded.noteArea}</p>
+                </div>`
+            }
+            //if array is empty show empty string
+            else {
+              showNote = ''
+            }
           return (
               <div key={key}>
               <h3>{country.nicename}</h3>
@@ -201,11 +319,14 @@ class BucketListPage extends React.Component {
                       position="relative"/>
                 <form onSubmit={this.handleAddNote}>
                   <label>
-                  Notes on your trip:
-                  <textarea value={this.state.value} onChange={this.handleChange} />
+                  Add notes on your trip:
+                  <textarea name="noteArea"/>
                   </label>
-                  <button>Submit</button>
+                  <input type="hidden" defaultValue={country.country_id} name='country_id' ></input>
+                  <button type="submit">Submit</button>
                 </form>
+                <h4>Existing notes:</h4>
+                {showNote}
               </div>
           )
       });

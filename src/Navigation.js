@@ -26,7 +26,7 @@ class Navigation extends Component  {
            <div className='outer-nav toolbar'>
                 <nav className='toolbar_navigation'>
                     <div className='toolbar-toggle'>
-                        <DrawerToggleButton click={this.context.drawerToggleButton}/>
+                        <DrawerToggleButton onClick={this.context.drawerToggleButton}/>
                     </div>
                         <Link className='nav_logo'to='/'><h2 className="logo">Trippster</h2></Link>
                         {TokenService.hasAuthToken() ? <div className='spacer'></div> : ''}

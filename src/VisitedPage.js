@@ -63,7 +63,7 @@ class VisitedPage extends React.Component {
         })
       })
 
-      ////////////////GET REQUEST FOR NOTES///////////////////////////
+    ////////////////GET REQUEST FOR NOTES///////////////////////////
     const url_notes = `${config.API_ENDPOINT}/notes`
 
     const options_notes = {
@@ -213,8 +213,7 @@ class VisitedPage extends React.Component {
           error: err.message
         })
       }) 
-
-    
+ 
   }
 
   handleAddNote = (e) => {
@@ -277,16 +276,13 @@ class VisitedPage extends React.Component {
       }) 
   }
   
-  render() {
-
-    
+  render() { 
 
     let showVisitedList = ''
     if (this.state.visitedCountriesAdded.length !== 0) {
       showVisitedList = this.state.visitedCountriesAdded.map((country, key) => {
           let valueOutput = `https://www.google.com/maps/embed/v1/place?key=AIzaSyDfouOPkJqw5K1AKoxQofTjm3jf3dlV4l0&q=${country.nicename}&maptype=roadmap`
-          ////display note ?/////////////////////////
-          
+          ////display note //////
           //if there are more than one objects in the array map them
           let showNote = ''
             if (this.state.noteAdded.length >1) {
@@ -324,13 +320,14 @@ class VisitedPage extends React.Component {
                         position="relative"/>
                 <form onSubmit={this.handleAddNote}>
                   <label>
-                  Notes on your trip:
+                  Add notes on your trip:
                   <textarea name="noteArea"/>
-                  {showNote}
                   </label>
                   <input type="hidden" defaultValue={country.country_id} name='country_id' ></input>
                   <button type="submit">Submit</button>
                 </form>
+                <h4>Existing notes:</h4>
+                {showNote}
               </div>
           )
       });
