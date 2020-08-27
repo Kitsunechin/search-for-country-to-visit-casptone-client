@@ -1,16 +1,15 @@
-import React, {Component} from 'react'
-import {NavLink} from 'react-router-dom'
+import React, {Component} from 'react';
+import {NavLink} from 'react-router-dom';
 
 import TokenService from './services/token-service.js';
 
-import './SideDrawer.css'
+import './SideDrawer.css';
 
 class SideDrawer extends Component {
     logOutClick = () => {
         console.log('Logging out')
         TokenService.clearAuthToken()
         TokenService.getUserId = (id) => {
-          // console.log(id)
         }
     
         window.location='/'

@@ -1,9 +1,9 @@
-import React from 'react'
+import React from 'react';
 
 import AuthApiService from './services/auth-api-service';
 import TokenService from './services/token-service.js';
 
-import './LandingPage.css'
+import './LandingPage.css';
 export default class RegistrationPage extends React.Component {
 
     constructor(props) {
@@ -65,7 +65,7 @@ export default class RegistrationPage extends React.Component {
       for (let value of formData) {
           data[value[0]] = value[1]
       }
-      console.log(data)
+  
       let {username, email, password} = data
       if (this.validateEmail(email) === '') {
         this.setState({
@@ -95,7 +95,7 @@ export default class RegistrationPage extends React.Component {
     })
 
       .then(response => {
-          console.log('user:', response)
+        
           TokenService.saveAuthToken(response.authToken)
           TokenService.saveUserId(response.id)
           window.location = '/visited'

@@ -1,6 +1,6 @@
-import React from 'react'
+import React from 'react';
 
-import './LandingPage.css'
+import './LandingPage.css';
 import LoginPage from './LoginPage';
 import RegistrationPage from './RegistrationPage';
 import Header from './Header';

@@ -1,18 +1,18 @@
 import React from 'react';
-import { Route, Switch, Redirect} from 'react-router-dom'
+import { Route, Switch, Redirect} from 'react-router-dom';
 
 // import config from './config'
 import './App.css';
 import AppContext from './AppContext';
 import TokenService from './services/token-service.js';
 
-import NotFoundPage from './NotFoundPage'
-import LandingPage from './LandingPage'
-import Navigation from './Navigation'
-import BucketListPage from './BucketListPage'
-import VisitedPage from './VisitedPage'
-import SideDrawer from './SideDrawer'
-import Backdrop from './Backdrop'
+import NotFoundPage from './NotFoundPage';
+import LandingPage from './LandingPage';
+import Navigation from './Navigation';
+import BucketListPage from './BucketListPage';
+import VisitedPage from './VisitedPage';
+import SideDrawer from './SideDrawer';
+import Backdrop from './Backdrop';
 
 
 export default class App extends React.Component {
@@ -33,12 +33,10 @@ export default class App extends React.Component {
 
 
 render() {
-  // const {store} = this.state
-  // console.log(`these are notes and folders ${this.state.notes}${this.state.folders}`)
   const contextValue = {
     drawerToggleButton: this.drawerToggleButton, ///needed
   }
-  console.log(contextValue)
+  
 
 
   let backdrop;

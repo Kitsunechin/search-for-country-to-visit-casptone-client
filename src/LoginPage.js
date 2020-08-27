@@ -1,9 +1,9 @@
-import React from 'react'
+import React from 'react';
 
 import TokenService from './services/token-service';
 import AuthApiService from './services/auth-api-service';
 
-import './LandingPage.css'
+import './LandingPage.css';
 export default class LoginPage extends React.Component {
 
     constructor(props) {
@@ -56,7 +56,7 @@ export default class LoginPage extends React.Component {
       for (let value of formData) {
           data[value[0]] = value[1]
       }
-      console.log(data)
+ 
       let {username, password} = data
     
       if (this.validateUsername(username) === '') {
@@ -75,7 +75,7 @@ export default class LoginPage extends React.Component {
       })
 
       //check if the state is populated with the search params data
-      console.log(this.state.params)
+   
 
       this.setState({ error: null })
       AuthApiService.postLogin({
@@ -84,7 +84,6 @@ export default class LoginPage extends React.Component {
       })
   
       .then(response => {
-        console.log("response ID", response)
         username = ''
         password = ''
         TokenService.saveAuthToken(response.authToken)
@@ -92,10 +91,9 @@ export default class LoginPage extends React.Component {
         window.location ='/visited'
       })
       .then(response => {
-        console.log("response:",response)
+      
       })
       .catch(err => {
-        console.log(err);
       });   
      
     }
@@ -107,9 +105,8 @@ export default class LoginPage extends React.Component {
           <form className="add-user" onSubmit={this.handleSubmit}>
           {errorMessage}
           <div className="box">
-          {/* {TokenService.getUserId()} */}
             <div className="input-group">
-              <label htmlFor="username">Username</label>
+              <label htmlFor="username">Username: Kitsune</label>
               <input
                 type="text"
                 name="username"
@@ -119,7 +116,7 @@ export default class LoginPage extends React.Component {
             </div>
   
             <div className="input-group">
-              <label htmlFor="password">Password</label>
+              <label htmlFor="password">Password: Kitsune666</label>
               <input
                 type="password"
                 name="password"

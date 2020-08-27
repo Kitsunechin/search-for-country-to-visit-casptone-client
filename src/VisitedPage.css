@@ -18,3 +18,10 @@ button {
 label {
     font-weight: bolder;
 }
+
+@media (max-width: 768px) {
+    #countries {
+        width: 100% !important;
+    }
+}
+

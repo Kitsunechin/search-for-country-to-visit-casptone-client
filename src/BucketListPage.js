@@ -1,6 +1,6 @@
-import React from 'react'
-import config from './config'
-import Iframe from 'react-iframe'
+import React from 'react';
+import config from './config';
+import Iframe from 'react-iframe';
 import TokenService from './services/token-service.js';
 
 import './BucketListPage.css'
@@ -15,18 +15,15 @@ class BucketListPage extends React.Component {
         selectCountry: ''
       },
       dropDownCountries: [],
-      bucketListCountriesAdded: []
+      bucketListCountriesAdded: [],
+      value: ''
     };
   }
   componentDidMount() {
     this.populateBucketListCountry()
     
-    console.log('Stateful component successfully mounted.');
     //populate dropdown list with countries
     const url = `${config.API_ENDPOINT}/all`
-    
-
-    console.log(url)
 
     const options = {
       method: 'GET',
@@ -51,7 +48,6 @@ class BucketListPage extends React.Component {
       .then(data => {
 
         //check if there is meaningfull data
-        console.log(data);
         // check if there are no results
         if (data.totalItems === 0) {
           throw new Error('No user found')
@@ -72,9 +68,6 @@ class BucketListPage extends React.Component {
   populateBucketListCountry() {
       
     const url = `${config.API_ENDPOINT}/bucket-list/user/${TokenService.getUserId()}`
-    
-
-    console.log(url)
 
     const options = {
       method: 'GET',
@@ -99,7 +92,6 @@ class BucketListPage extends React.Component {
       .then(data => {
 
         //check if there is meaningfull data
-        console.log(data);
         // check if there are no results
         if (data.totalItems === 0) {
           throw new Error('No user found')
@@ -133,20 +125,17 @@ class BucketListPage extends React.Component {
     for (let value of formData) {
       data[value[0]] = value[1]
     }
-    console.log(data)
     let {
       selectCountry,
     } = data
     let countryId = selectCountry.split('_')[0]
     let countryNicename = selectCountry.split('_')[1]
-    console.log(countryId,countryNicename)
     //assigning the object from the form data to params in the state
     this.setState({
       params: data
     })
 
     //check if the state is populated with the search params data
-    console.log(this.state.params)
 
 ////////////////POST REQUEST////////////////////////////
 
@@ -155,8 +144,6 @@ class BucketListPage extends React.Component {
         user_id: TokenService.getUserId(),   
         nicename: countryNicename
       }
-      
-      console.log(newCountry)
 
   
       //useing the url and paramters above make the api call
@@ -179,7 +166,6 @@ class BucketListPage extends React.Component {
         // use the json api output and assign to a variable
         .then(data => {
           this.populateBucketListCountry()
-          console.log(this.state)
         })
         .catch(err => {
           this.setState({
@@ -187,13 +173,21 @@ class BucketListPage extends React.Component {
           })
         })  
   }
+
+  handleChange = (event) => {
+    this.setState({value: event.target.value});
+  }
+
+  handleAddNote = (event) => {
+    alert(this.state.value);
+    event.preventDefault();
+  }
   ///////////////////////////////////////////////////
   render() {
     
     let showBucketList = ''
     if (this.state.bucketListCountriesAdded.length !== 0) {
       showBucketList = this.state.bucketListCountriesAdded.map((country, key) => {
-          // console.log(country.id)
           let valueOutput = `https://www.google.com/maps/embed/v1/place?key=AIzaSyDfouOPkJqw5K1AKoxQofTjm3jf3dlV4l0&q=${country.nicename}&maptype=roadmap`
           return (
               <div key={key}>
@@ -205,6 +199,13 @@ class BucketListPage extends React.Component {
                       className="myClassname"
                       display="initial"
                       position="relative"/>
+                <form onSubmit={this.handleAddNote}>
+                  <label>
+                  Notes on your trip:
+                  <textarea value={this.state.value} onChange={this.handleChange} />
+                  </label>
+                  <button>Submit</button>
+                </form>
               </div>
           )
       });
@@ -218,13 +219,12 @@ class BucketListPage extends React.Component {
       }
       
     }
-    console.log(bucketListCountriesArray)
 
 
     let listOfCountries = ''
     if(this.state.dropDownCountries.length !== 0 ){
       listOfCountries = this.state.dropDownCountries.map((country, key) => {
-      // console.log(country.id)
+    
       let valueOutput = `${country.id}_${country.nicename}`
       //only display the countries which were not yet added to the bucket list
       if(!bucketListCountriesArray.includes(country.nicename))

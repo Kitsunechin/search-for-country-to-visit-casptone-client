@@ -1,12 +1,12 @@
-import React, {Component} from 'react'
-import {NavLink} from 'react-router-dom'
+import React, {Component} from 'react';
+import {NavLink} from 'react-router-dom';
 import {Link} from 'react-router-dom';
 
 import TokenService from './services/token-service.js';
 import AppContext from './AppContext';
 
-import DrawerToggleButton from './DrawerToggleButton'
-import './Navigation.css'
+import DrawerToggleButton from './DrawerToggleButton';
+import './Navigation.css';
 
 
 class Navigation extends Component  {
@@ -15,7 +15,7 @@ class Navigation extends Component  {
       console.log('Logging out')
       TokenService.clearAuthToken()
       TokenService.getUserId = (id) => {
-        // console.log(id)
+  
       }
   
       window.location='/'
