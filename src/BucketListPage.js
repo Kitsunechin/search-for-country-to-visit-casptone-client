@@ -18,7 +18,7 @@ class BucketListPage extends React.Component {
       bucketListCountriesAdded: [],
       noteAdded: ''
     };
-  }
+  };
   componentDidMount() {
     this.populateBucketListCountry()
     
@@ -59,8 +59,8 @@ class BucketListPage extends React.Component {
       .catch(err => {
         this.setState({
           error: err.message
-        })
-      })
+        });
+      });
 
       
   ////////////////GET REQUEST FOR NOTES///////////////////////////
@@ -72,7 +72,7 @@ class BucketListPage extends React.Component {
       "Authorization": "",
       "Content-Type": "application/json"
     }
-  }
+  };
 
   //using the url and paramters above make the api call
   fetch(url_notes, options_notes)
@@ -87,7 +87,6 @@ class BucketListPage extends React.Component {
     })
     // use the json api output
     .then(data => {
-      console.log(data)
       //check if there is meaningfull data
       // check if there are no results
       if (data.totalItems === 0) {
@@ -96,14 +95,13 @@ class BucketListPage extends React.Component {
       this.setState({
         noteAdded: data
       })
-    console.log(this.state)
     })
     .catch(err => {
       this.setState({
         error: err.message
       })
-    })
-}
+    });
+};
 ///////////////////////////////////////////////////
 
   populateBucketListCountry() {
@@ -116,7 +114,7 @@ class BucketListPage extends React.Component {
         "Authorization": "",
         "Content-Type": "application/json"
       }
-    }
+    };
 
     //useing the url and paramters above make the api call
     fetch(url, options)
@@ -145,14 +143,14 @@ class BucketListPage extends React.Component {
         this.setState({
           error: err.message
         })
-      })
-  }
+      });
+  };
 
   formatQueryParams(params) {
     const queryItems = Object.keys(params)
       .map(key => `${encodeURIComponent(key)}=${encodeURIComponent(params[key])}`)
     return queryItems.join('&')
-  }
+  };
 
   handleSubmit = (e) => {
     e.preventDefault();
@@ -174,7 +172,7 @@ class BucketListPage extends React.Component {
     //assigning the object from the form data to params in the state
     this.setState({
       params: data
-    })
+    });
 
     //check if the state is populated with the search params data
 
@@ -212,8 +210,8 @@ class BucketListPage extends React.Component {
           this.setState({
             error: err.message
           })
-        })  
-  }
+        }); 
+  };
 
 
   handleAddNote = (e) => {
@@ -236,7 +234,7 @@ class BucketListPage extends React.Component {
     //assigning the object from the form data to params in the state
     this.setState({
       noteAdded: data
-    })
+    });
     
     
     ////////////////POST REQUEST FOR NOTES////////////////////////////
@@ -244,7 +242,7 @@ class BucketListPage extends React.Component {
     const newNote = {
       user_country_id: country_id, 
       note_content: noteArea
-    }
+    };
 
 
     //useing the url and paramters above make the api call
@@ -266,25 +264,24 @@ class BucketListPage extends React.Component {
       })
       // use the json api output and assign to a variable
       .then(data => {
-        console.log(data)
         window.location = `/visited`
       })
       .catch(err => {
         this.setState({
           error: err.message
         })
-      }) 
-  }
+      });
+  };
   ///////////////////////////////////////////////////
   render() {
     
-    let showBucketList = ''
+    let showBucketList = '';
     if (this.state.bucketListCountriesAdded.length !== 0) {
       showBucketList = this.state.bucketListCountriesAdded.map((country, key) => {
-          let valueOutput = `https://www.google.com/maps/embed/v1/place?key=AIzaSyDfouOPkJqw5K1AKoxQofTjm3jf3dlV4l0&q=${country.nicename}&maptype=roadmap`
+          let valueOutput = `https://www.google.com/maps/embed/v1/place?key=AIzaSyDfouOPkJqw5K1AKoxQofTjm3jf3dlV4l0&q=${country.nicename}&maptype=roadmap`;
           ////display note /////////////////////////
           //if there are more than one objects in the array map them
-          let showNote = ''
+          let showNote = '';
             if (this.state.noteAdded.length >1) {
               showNote = this.state.noteAdded.map((note, key) => {
               
@@ -306,7 +303,7 @@ class BucketListPage extends React.Component {
             //if array is empty show empty string
             else {
               showNote = ''
-            }
+            };
           return (
               <div key={key}>
               <h3>{country.nicename}</h3>
@@ -342,11 +339,11 @@ class BucketListPage extends React.Component {
     }
 
 
-    let listOfCountries = ''
+    let listOfCountries = '';
     if(this.state.dropDownCountries.length !== 0 ){
       listOfCountries = this.state.dropDownCountries.map((country, key) => {
     
-      let valueOutput = `${country.id}_${country.nicename}`
+      let valueOutput = `${country.id}_${country.nicename}`;
       //only display the countries which were not yet added to the bucket list
       if(!bucketListCountriesArray.includes(country.nicename))
       {

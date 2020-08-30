@@ -15,7 +15,7 @@ class SideDrawer extends Component {
         }
     
         window.location='/'
-      }
+    };
     render() {
         let drawerClasses = 'side-drawer';
     if (this.props.show) {

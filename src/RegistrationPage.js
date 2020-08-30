@@ -3,7 +3,7 @@ import React from 'react';
 import AuthApiService from './services/auth-api-service';
 import TokenService from './services/token-service.js';
 
-import './LandingPage.css';
+import './LandingPage.css'
 export default class RegistrationPage extends React.Component {
 
     constructor(props) {
@@ -105,7 +105,7 @@ export default class RegistrationPage extends React.Component {
           this.setState({ error: res.error })
       })  
 
-    }
+    };
   
     render() {
       //if there is an error message display it

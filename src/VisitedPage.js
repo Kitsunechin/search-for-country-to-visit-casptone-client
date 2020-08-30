@@ -4,7 +4,7 @@ import Iframe from 'react-iframe';
 import AuthApiService from './services/auth-api-service';
 import TokenService from './services/token-service.js';
 
-import './VisitedPage.css';
+import './VisitedPage.css'
 
 //to add user at a later stage
 class VisitedPage extends React.Component {
@@ -19,11 +19,10 @@ class VisitedPage extends React.Component {
       visitedCountriesAdded: [],
       noteAdded: ''
     };
-  }
+  };
   
   componentDidMount() {
     this.populatevisitedCountry()
-    console.log('Stateful component successfully mounted.');
     const url = `${config.API_ENDPOINT}/all`
 
     const options = {
@@ -32,7 +31,7 @@ class VisitedPage extends React.Component {
         "Authorization": "",
         "Content-Type": "application/json"
       }
-    }
+    };
 
     //using the url and paramters above make the api call
     fetch(url, options)
@@ -87,7 +86,6 @@ class VisitedPage extends React.Component {
       })
       // use the json api output
       .then(data => {
-        console.log(data)
         //check if there is meaningfull data
         // check if there are no results
         if (data.totalItems === 0) {
@@ -96,7 +94,6 @@ class VisitedPage extends React.Component {
         this.setState({
           noteAdded: data
         })
-      console.log(this.state)
       })
       .catch(err => {
         this.setState({
@@ -266,7 +263,6 @@ class VisitedPage extends React.Component {
       })
       // use the json api output and assign to a variable
       .then(data => {
-        console.log(data)
         window.location = `/visited`
       })
       .catch(err => {

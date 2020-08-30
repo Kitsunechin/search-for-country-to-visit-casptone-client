@@ -6,7 +6,7 @@ import TokenService from './services/token-service.js';
 import AppContext from './AppContext';
 
 import DrawerToggleButton from './DrawerToggleButton';
-import './Navigation.css';
+import './Navigation.css'
 
 
 class Navigation extends Component  {
@@ -19,7 +19,7 @@ class Navigation extends Component  {
       }
   
       window.location='/'
-    }
+    };
   
     render(){
         return( 

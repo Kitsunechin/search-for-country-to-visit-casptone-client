@@ -1,4 +1,4 @@
-# Search for Country to Visit
+# Trippster
 The app allows its users to search for countries and add them to their bucket-list
 
 ## Working Prototype

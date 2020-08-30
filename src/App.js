@@ -12,7 +12,7 @@ import Navigation from './Navigation';
 import BucketListPage from './BucketListPage';
 import VisitedPage from './VisitedPage';
 import SideDrawer from './SideDrawer';
-import Backdrop from './Backdrop';
+import Backdrop from './Backdrop'
 
 
 export default class App extends React.Component {
@@ -25,17 +25,17 @@ export default class App extends React.Component {
     this.setState((prevState) => {
       return {sideDrawerOpen: !prevState.sideDrawerOpen}
     })
-  }
+  };
 
   backdropClickHandler = () => {
     this.setState({sideDrawerOpen: false})
-  }
+  };
 
 
 render() {
   const contextValue = {
     drawerToggleButton: this.drawerToggleButton, ///needed
-  }
+  };
   
 
 

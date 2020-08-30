@@ -1,5 +1,5 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
+import React from 'react';
+import ReactDOM from 'react-dom';
 import VisitedPage from './VisitedPage'
 
 it('renders without crashing', () => {

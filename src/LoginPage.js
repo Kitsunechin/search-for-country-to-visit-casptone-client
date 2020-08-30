@@ -15,13 +15,13 @@ export default class LoginPage extends React.Component {
           password: ''
         }
       };
-    }
+    };
 
     formatQueryParams(params) {
       const queryItems = Object.keys(params)
           .map(key => `${encodeURIComponent(key)}=${encodeURIComponent(params[key])}`)
       return queryItems.join('&')
-    }
+    };
 
     validateUsername(inputUsername){
       let outputUsername = inputUsername;
@@ -31,7 +31,7 @@ export default class LoginPage extends React.Component {
           outputUsername = ""
       }
       return outputUsername
-    }
+    };
 
     validatePassword(inputPassword){
       let outputPassword = inputPassword;
@@ -42,7 +42,7 @@ export default class LoginPage extends React.Component {
           outputPassword = ""
       }
       return outputPassword
-    }
+    };
   
     handleSubmit = (e) => {
       e.preventDefault();
