@@ -4,7 +4,7 @@ import Iframe from 'react-iframe';
 import AuthApiService from './services/auth-api-service';
 import TokenService from './services/token-service.js';
 
-import './VisitedPage.css'
+import './VisitedPage.css';
 
 //to add user at a later stage
 class VisitedPage extends React.Component {

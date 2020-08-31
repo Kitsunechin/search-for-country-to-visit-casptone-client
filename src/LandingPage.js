@@ -3,7 +3,7 @@ import React from 'react';
 import './LandingPage.css';
 import LoginPage from './LoginPage';
 import RegistrationPage from './RegistrationPage';
-import Header from './Header'
+import Header from './Header';
 
 export default class LandingPage extends React.Component {
 

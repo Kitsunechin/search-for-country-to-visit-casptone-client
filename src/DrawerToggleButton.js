@@ -1,7 +1,7 @@
 import React from 'react';
 import AppContext from './AppContext';
 
-import './DrawerToggleButton.css'
+import './DrawerToggleButton.css';
 
 class DrawerToggleButton extends React.Component {
     static contextType = AppContext
