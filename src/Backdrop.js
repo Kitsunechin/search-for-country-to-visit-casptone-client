@@ -7,4 +7,4 @@ const Backdrop = props => (
     </div>
 );
 
-export default Backdrop
+export default Backdrop;

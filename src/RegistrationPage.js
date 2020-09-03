@@ -16,13 +16,13 @@ export default class RegistrationPage extends React.Component {
           password: ''
         }
       };
-    }
+    };
 
     formatQueryParams(params) {
       const queryItems = Object.keys(params)
           .map(key => `${encodeURIComponent(key)}=${encodeURIComponent(params[key])}`)
       return queryItems.join('&')
-  }
+    };
     
     validateEmail(inputEmail){
       let outputEmail = inputEmail;
@@ -31,7 +31,7 @@ export default class RegistrationPage extends React.Component {
           outputEmail = ""
       }
       return outputEmail
-    }
+    };
     validateUsername(inputUsername){
       let outputUsername = inputUsername;
       // only lowercase and uppercase letters and dash
@@ -40,7 +40,7 @@ export default class RegistrationPage extends React.Component {
           outputUsername = ""
       }
       return outputUsername
-    }
+    };
 
     validatePassword(inputPassword){
       let outputPassword = inputPassword;
@@ -51,41 +51,41 @@ export default class RegistrationPage extends React.Component {
           outputPassword = ""
       }
       return outputPassword
-    }
+    };
 
     handleSubmit = (e) => {
       e.preventDefault();
       //create an object to store the search filters
-      const data = {}
+      const data = {};
 
       //get all the from data from the form component
-      const formData = new FormData(e.target)
+      const formData = new FormData(e.target);
 
       //for each of the keys in form data populate it with form value
       for (let value of formData) {
           data[value[0]] = value[1]
-      }
+      };
   
-      let {username, email, password} = data
+      let {username, email, password} = data;
       if (this.validateEmail(email) === '') {
         this.setState({
             error: 'email is not valid'
-        })
-      }
+        });
+      };
       if (this.validateUsername(username) === '') {
         this.setState({
             error: 'username is not valid'
-        })
-      }
+        });
+      };
       if (this.validatePassword(password) === '') {
         this.setState({
             error: 'password is not valid'
-        })
-      }
+        });
+      };
       //assigning the object from the form data to params in the state
       this.setState({
           params: data
-      })
+      });
 
     this.setState({ error: null })
     AuthApiService.postUser({

@@ -12,7 +12,7 @@ export default class LandingPage extends React.Component {
         this.state = {
             isLoginOpen: false,
             isRegisterOpen: false
-        }
+        };
     };
 
     showLoginBox = () => {

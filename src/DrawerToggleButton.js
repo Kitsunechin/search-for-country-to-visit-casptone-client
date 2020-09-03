@@ -16,4 +16,4 @@ class DrawerToggleButton extends React.Component {
     }   
 }
 
-export default DrawerToggleButton
+export default DrawerToggleButton;

@@ -10,14 +10,12 @@ import './Navigation.css';
 
 
 class Navigation extends Component  {
-    static contextType = AppContext
+    static contextType = AppContext;
     logOutClick = () => {
       console.log('Logging out')
       TokenService.clearAuthToken()
-      TokenService.getUserId = (id) => {
-  
+      TokenService.getUserId = (id) => { 
       }
-  
       window.location='/'
     };
   

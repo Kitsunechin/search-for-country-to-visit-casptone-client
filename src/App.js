@@ -19,12 +19,12 @@ export default class App extends React.Component {
   
   state = {
     sideDrawerOpen: false,
-  }
+  };
   /////needed//////
   drawerToggleButton = () => {
     this.setState((prevState) => {
       return {sideDrawerOpen: !prevState.sideDrawerOpen}
-    })
+    });
   };
 
   backdropClickHandler = () => {
@@ -43,7 +43,7 @@ render() {
 
   if (this.state.sideDrawerOpen) {
     backdrop = <Backdrop click={this.backdropClickHandler}/>
-  }
+  };
 
   return (
     <AppContext.Provider value={contextValue}>
@@ -73,6 +73,6 @@ render() {
     </div>
     </AppContext.Provider>
   );
- }
-}
+ };
+};
 

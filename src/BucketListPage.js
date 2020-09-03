@@ -20,10 +20,10 @@ class BucketListPage extends React.Component {
     };
   };
   componentDidMount() {
-    this.populateBucketListCountry()
+    this.populateBucketListCountry();
     
     //populate dropdown list with countries
-    const url = `${config.API_ENDPOINT}/all`
+    const url = `${config.API_ENDPOINT}/all`;
 
     const options = {
       method: 'GET',
@@ -31,7 +31,7 @@ class BucketListPage extends React.Component {
         "Authorization": "",
         "Content-Type": "application/json"
       }
-    }
+    };
 
     //useing the url and paramters above make the api call
     fetch(url, options)
@@ -42,7 +42,7 @@ class BucketListPage extends React.Component {
           throw new Error('Something went wrong, please try again later.')
         }
         // ... convert it to json
-        return res.json()
+        return res.json();
       })
       // use the json api output
       .then(data => {
@@ -64,7 +64,7 @@ class BucketListPage extends React.Component {
 
       
   ////////////////GET REQUEST FOR NOTES///////////////////////////
-  const url_notes = `${config.API_ENDPOINT}/notes`
+  const url_notes = `${config.API_ENDPOINT}/notes`;
 
   const options_notes = {
     method: 'GET',
@@ -83,7 +83,7 @@ class BucketListPage extends React.Component {
         throw new Error('Something went wrong, please try again later.')
       }
       // ... convert it to json
-      return res.json()
+      return res.json();
     })
     // use the json api output
     .then(data => {
@@ -91,10 +91,10 @@ class BucketListPage extends React.Component {
       // check if there are no results
       if (data.totalItems === 0) {
         throw new Error('No user found')
-      }
+      };
       this.setState({
         noteAdded: data
-      })
+      });
     })
     .catch(err => {
       this.setState({
@@ -106,7 +106,7 @@ class BucketListPage extends React.Component {
 
   populateBucketListCountry() {
       
-    const url = `${config.API_ENDPOINT}/bucket-list/user/${TokenService.getUserId()}`
+    const url = `${config.API_ENDPOINT}/bucket-list/user/${TokenService.getUserId()}`;
 
     const options = {
       method: 'GET',
@@ -125,7 +125,7 @@ class BucketListPage extends React.Component {
           throw new Error('Something went wrong, please try again later.')
         }
         // ... convert it to json
-        return res.json()
+        return res.json();
       })
       // use the json api output
       .then(data => {
@@ -137,12 +137,12 @@ class BucketListPage extends React.Component {
         }
         this.setState({
           bucketListCountriesAdded: data
-        })
+        });
       })
       .catch(err => {
         this.setState({
           error: err.message
-        })
+        });
       });
   };
 
@@ -155,20 +155,20 @@ class BucketListPage extends React.Component {
   handleSubmit = (e) => {
     e.preventDefault();
     //create an object to store the search filters
-    const data = {}
+    const data = {};
 
     //get all the data from the form component and populate object with it
-    const formData = new FormData(e.target)
+    const formData = new FormData(e.target);
 
     //for each of the keys in form data populate it with form value
     for (let value of formData) {
       data[value[0]] = value[1]
-    }
+    };
     let {
       selectCountry,
-    } = data
-    let countryId = selectCountry.split('_')[0]
-    let countryNicename = selectCountry.split('_')[1]
+    } = data;
+    let countryId = selectCountry.split('_')[0];
+    let countryNicename = selectCountry.split('_')[1];
     //assigning the object from the form data to params in the state
     this.setState({
       params: data
@@ -182,7 +182,7 @@ class BucketListPage extends React.Component {
         id: countryId,
         user_id: TokenService.getUserId(),   
         nicename: countryNicename
-      }
+      };
 
   
       //useing the url and paramters above make the api call
@@ -217,10 +217,10 @@ class BucketListPage extends React.Component {
   handleAddNote = (e) => {
     e.preventDefault();
     //create an object to store the search filters
-    const data = {}
+    const data = {};
 
     //get all the from data from the form component
-    const formData = new FormData(e.target)
+    const formData = new FormData(e.target);
 
     //for each of the keys in form data populate it with form value
     for (let value of formData) {
@@ -229,7 +229,7 @@ class BucketListPage extends React.Component {
     let {
       noteArea,
       country_id
-    } = data
+    } = data;
   
     //assigning the object from the form data to params in the state
     this.setState({
@@ -372,4 +372,4 @@ class BucketListPage extends React.Component {
     </div>
     )
 } }
-export default BucketListPage
+export default BucketListPage;

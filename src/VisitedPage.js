@@ -22,8 +22,8 @@ class VisitedPage extends React.Component {
   };
   
   componentDidMount() {
-    this.populatevisitedCountry()
-    const url = `${config.API_ENDPOINT}/all`
+    this.populatevisitedCountry();
+    const url = `${config.API_ENDPOINT}/all`;
 
     const options = {
       method: 'GET',
@@ -63,7 +63,7 @@ class VisitedPage extends React.Component {
       })
 
     ////////////////GET REQUEST FOR NOTES///////////////////////////
-    const url_notes = `${config.API_ENDPOINT}/notes`
+    const url_notes = `${config.API_ENDPOINT}/notes`;
 
     const options_notes = {
       method: 'GET',
@@ -71,7 +71,7 @@ class VisitedPage extends React.Component {
         "Authorization": "",
         "Content-Type": "application/json"
       }
-    }
+    };
 
     //using the url and paramters above make the api call
     fetch(url_notes, options_notes)
@@ -104,7 +104,7 @@ class VisitedPage extends React.Component {
  ///////////////////////////////////////////////////
   populatevisitedCountry() {
       
-    const url = `${config.API_ENDPOINT}/visited/user/${TokenService.getUserId()}`
+    const url = `${config.API_ENDPOINT}/visited/user/${TokenService.getUserId()}`;
 
     const options = {
       method: 'GET',
@@ -112,7 +112,7 @@ class VisitedPage extends React.Component {
         "Authorization": "",
         "Content-Type": "application/json"
       }
-    }
+    };
 
     //useing the url and paramters above make the api call
     fetch(url, options)
@@ -141,21 +141,21 @@ class VisitedPage extends React.Component {
         this.setState({
           error: err.message
         })
-      })
-  }
+      });
+  };
   formatQueryParams(params) {
     const queryItems = Object.keys(params)
       .map(key => `${encodeURIComponent(key)}=${encodeURIComponent(params[key])}`)
     return queryItems.join('&')
-  }
+  };
 
   handleSubmit = (e) => {
     e.preventDefault();
     //create an object to store the search filters
-    const data = {}
+    const data = {};
 
     //get all the from data from the form component
-    const formData = new FormData(e.target)
+    const formData = new FormData(e.target);
 
     //for each of the keys in form data populate it with form value
     for (let value of formData) {
@@ -163,16 +163,16 @@ class VisitedPage extends React.Component {
     }
     let {
       selectCountry,
-    } = data
+    } = data;
 
-    let countryId = selectCountry.split('_')[0]
-    let countryNicename = selectCountry.split('_')[1]
+    let countryId = selectCountry.split('_')[0];
+    let countryNicename = selectCountry.split('_')[1];
   
    
     //assigning the object from the form data to params in the state
     this.setState({
       params: data
-    })
+    });
 
     //check if the state is populated with the search params data
     ////////////////POST REQUEST////////////////////////////
@@ -181,7 +181,7 @@ class VisitedPage extends React.Component {
       id: countryId,
       user_id: TokenService.getUserId(), 
       nicename: countryNicename
-    }
+    };
 
 
     //useing the url and paramters above make the api call
@@ -216,24 +216,25 @@ class VisitedPage extends React.Component {
   handleAddNote = (e) => {
     e.preventDefault();
     //create an object to store the search filters
-    const data = {}
+    const data = {};
 
     //get all the from data from the form component
-    const formData = new FormData(e.target)
+    const formData = new FormData(e.target);
 
     //for each of the keys in form data populate it with form value
     for (let value of formData) {
       data[value[0]] = value[1]
     }
+
     let {
       noteArea,
       country_id
-    } = data
+    } = data;
   
     //assigning the object from the form data to params in the state
     this.setState({
       noteAdded: data
-    })
+    });
     
     
     ////////////////POST REQUEST FOR NOTES////////////////////////////
@@ -241,7 +242,7 @@ class VisitedPage extends React.Component {
     const newNote = {
       user_country_id: country_id, 
       note_content: noteArea
-    }
+    };
 
 
     //useing the url and paramters above make the api call
@@ -372,4 +373,4 @@ class VisitedPage extends React.Component {
     </div>
     )
 } }
-export default VisitedPage
+export default VisitedPage;

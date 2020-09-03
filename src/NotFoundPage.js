@@ -6,4 +6,4 @@ export default function NotFoundPage() {
                 404 Page not Found
             </div>
         )
-}
+};

@@ -47,36 +47,34 @@ export default class LoginPage extends React.Component {
     handleSubmit = (e) => {
       e.preventDefault();
       //create an object to store the search filters
-      const data = {}
+      const data = {};
 
       //get all the from data from the form component
-      const formData = new FormData(e.target)
+      const formData = new FormData(e.target);
 
       //for each of the keys in form data populate it with form value
       for (let value of formData) {
           data[value[0]] = value[1]
-      }
+      };
  
-      let {username, password} = data
+      let {username, password} = data;
     
       if (this.validateUsername(username) === '') {
         this.setState({
             error: 'username is not valid'
-        })
-      }
+        });
+      };
       if (this.validatePassword(password) === '') {
         this.setState({
             error: 'password is not valid'
-        })
-      }
+        });
+      };
       //assigning the object from the form data to params in the state
       this.setState({
           params: data
-      })
+      });
 
       //check if the state is populated with the search params data
-   
-
       this.setState({ error: null })
       AuthApiService.postLogin({
         user_name: username,
@@ -133,6 +131,5 @@ export default class LoginPage extends React.Component {
           </form>
         </div>
       );
-    }
-  
-  }
+    };
+  };

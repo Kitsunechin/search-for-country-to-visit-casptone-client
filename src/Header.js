@@ -10,5 +10,5 @@ const Header = () =>
            <span> Login or Register and start planning your next destination!</span>
            </div>
         </header>
-    )
-export default Header
+    );
+export default Header;

@@ -7,13 +7,12 @@ import TokenService from './services/token-service.js';
 import './SideDrawer.css';
 
 class SideDrawer extends Component {
-    static contextType = AppContext
+    static contextType = AppContext;
     logOutClick = () => {
         console.log('Logging out')
         TokenService.clearAuthToken()
         TokenService.getUserId = (id) => {
         }
-    
         window.location='/'
     };
     render() {
