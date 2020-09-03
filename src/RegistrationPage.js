@@ -95,12 +95,14 @@ export default class RegistrationPage extends React.Component {
     })
 
       .then(response => {
-        
+        if(response === undefined) {
+          this.setState({ error: "user name already taken" })
+        } else {
           TokenService.saveAuthToken(response.authToken)
           TokenService.saveUserId(response.id)
           window.location = '/visited'
+        }     
       }) 
-
       .catch(res => {
           this.setState({ error: res.error })
       })  
