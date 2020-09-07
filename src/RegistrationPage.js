@@ -71,42 +71,44 @@ export default class RegistrationPage extends React.Component {
         this.setState({
             error: 'email is not valid'
         });
-      };
-      if (this.validateUsername(username) === '') {
+      }
+      else if (this.validateUsername(username) === '') {
         this.setState({
             error: 'username is not valid'
         });
-      };
-      if (this.validatePassword(password) === '') {
+      }
+      else if (this.validatePassword(password) === '') {
         this.setState({
             error: 'password is not valid'
         });
-      };
-      //assigning the object from the form data to params in the state
-      this.setState({
-          params: data
-      });
+      }
+      else {
+          //assigning the object from the form data to params in the state
+              this.setState({
+                params: data
+            });
 
-    this.setState({ error: null })
-    AuthApiService.postUser({
-        user_name: username,
-        user_email: email,
-        user_password: password,
-    })
+          this.setState({ error: null })
+          AuthApiService.postUser({
+              user_name: username,
+              user_email: email,
+              user_password: password,
+          })
 
-      .then(response => {
-        if(response === undefined) {
-          this.setState({ error: "user name already taken" })
-        } else {
-          TokenService.saveAuthToken(response.authToken)
-          TokenService.saveUserId(response.id)
-          window.location = '/visited'
-        }     
-      }) 
-      .catch(res => {
-          this.setState({ error: res.error })
-      })  
-
+            .then(response => {
+              if(response === undefined) {
+                this.setState({ error: "user name already taken" })
+              } else {
+                TokenService.saveAuthToken(response.authToken)
+                TokenService.saveUserId(response.id)
+                window.location = '/visited'
+              }     
+            }) 
+            .catch(res => {
+                this.setState({ error: res.error })
+            }) 
+      }
+     
     };
   
     render() {
